@@ -1,0 +1,8 @@
+<?php
+header('Access-Control-Allow-Headers: *');
+header('Access-Control-Allow-Origin: *');
+require('objects.php');
+
+$status = $_GET['status'];
+
+print_r(json_encode($func->getRegtime($status)));
