@@ -28,9 +28,7 @@ function UpdateAgr() {
         name: Yup.string().required('! Required'),
         phone: Yup.string().required('! Required'),
         amount: Yup.number().positive('! must be positive').required('! Required'),
-        total: Yup.number().integer('! must be positive'),
         recived: Yup.number().integer('! must be an integer'),
-        reminder: Yup.number().integer('! must be an integer'),
         startDate: Yup.date().required('! Required'),
         time: Yup.string().required('! Required'),
         playDays: Yup.array().required('! Required').min(1, 'Choose an option')
@@ -43,8 +41,6 @@ function UpdateAgr() {
             phone: values.phone,
             amount: values.amount,
             recived: values.recived,
-            reminder: values.reminder,
-            total: values.total,
             startDate: values.startDate,
             playDays: values.playDays,
             endDate: values.endDate,
@@ -66,9 +62,7 @@ if(singleTime.isSuccess){
                                 name: singleTime.data.name,
                                 phone: singleTime.data.phone,
                                 amount: singleTime.data.amount_per_hour,
-                                total: singleTime.data.total_amount,
                                 recived: singleTime.data.recived,
-                                reminder: singleTime.data.reminder,
                                 startDate: singleTime.data.start_date,
                                 playDays: [],
                                 endDate: singleTime.data.end_date,
@@ -89,28 +83,22 @@ if(singleTime.isSuccess){
                                             <div className="col-lg-6">
                                                 <FormControl control='input' type='text' name='phone' label='Custommer Phone' placeholder='phone' />
                                             </div>
-                                            <div className="col-lg-3 mt-3">
+                                            <div className="col-lg-6 mt-3">
                                                 <FormControl control='input' type='text' name='amount' label='Amount per hour' placeholder='amount' />
                                             </div>
-                                            <div className="col-lg-3 mt-3">
-                                                <FormControl control='input' type='text' name='recived' label='Recived' placeholder='recived' />
+                                            <div className="col-lg-6 mt-3">
+                                                <FormControl control='input' type='text' name='recived' disabled label='Recived' placeholder='recived' />
                                             </div>
-                                            <div className="col-lg-3 mt-3">
-                                                <FormControl control='input' type='text' name='reminder' label='Reminder' placeholder='reminder' />
-                                            </div>
-                                            <div className="col-lg-3 mt-3">
-                                                <FormControl control='input' type='text' name='total' label='Total amount' placeholder='total' />
-                                            </div>
-                                            <div className="col-lg-3 mt-3">
-                                                <FormControl control='input' type='date' name='startDate' label='Start Date' />
-                                            </div>
-                                            <div className="col-lg-9 mt-3">
+                                            <div className="col-lg-12 mt-3">
                                                 <FormControl control='checkboxU' selected={singleTime.data.play_days} name='playDays' options={options} label='Play Days' />
                                             </div>
-                                            <div className="col-lg-6 mt-3">
+                                            <div className="col-lg-4 mt-3">
+                                                <FormControl control='input' type='date' name='startDate' label='Start Date' />
+                                            </div>
+                                            <div className="col-lg-4 mt-3">
                                                 <FormControl control='input' type='date' name='endDate' label='End date' />
                                             </div>
-                                            <div className="col-lg-6 mt-3">
+                                            <div className="col-lg-4 mt-3">
                                                 <FormControl control='input' type='text' name='time' label='Time' placeholder='00 am/pm, 00 am/pm ...' />
                                             </div>
                                             <div className='col-lg-4 mt-3'>

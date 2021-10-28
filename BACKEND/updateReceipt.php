@@ -9,6 +9,8 @@ $id = $_GET['id'];
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-$status = $data['status'];
+$agr_id = $data['agrId'];
+$newReceipt = $data['newReceipt'];
+$oldReceipt = $data['oldReceipt'];
  
-$func->updateRegStatus($id, $status, $date);
+$func->updateReceipt($id, $agr_id, $oldReceipt, $newReceipt, $date);

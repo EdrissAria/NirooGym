@@ -9,9 +9,9 @@ import { useMutation } from 'react-query'
 
 function RecordTime() {
     const addRegtime = useMutation(api.addRegtime);
-    if(addRegtime.isSuccess){
-        return window.location.reload();
-    }
+    // if(addRegtime.isSuccess){
+    //     return window.location.reload();
+    // }
     const initialValues = {
         name: '',
         phone: '',
@@ -46,7 +46,7 @@ function RecordTime() {
     return (
         <div className="addpro_form">
             <div className="container">
-                <Title linkTo="/agreementTime" title="Record a New" subTitle="Reguler Time" buttonValue="agreement time" />
+                <Title linkTo="/agreementTime" title="Record a New" subTitle="regular Time" buttonValue="agreement time" />
                 <div className="add_time">
                     <Formik
                         initialValues={initialValues}

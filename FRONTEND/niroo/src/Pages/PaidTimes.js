@@ -1,13 +1,13 @@
 import React, {useState} from 'react'
 import AgreementTimesTable from '../components/AgreementTimesTable';
-import RegulerTimesTable from '../components/RegulerTimesTable';
+import RegularTimesTable from '../components/RegularTimesTable'
 
 
 function PaidTimes() {
     const [link, setlink] = useState('Agreement Times');
 
     const clickhandle = ()=>{
-        link != 'Reguler Times'?setlink('Reguler Times'):setlink('Agreement Times');
+        link != 'regular Times'?setlink('regular Times'):setlink('Agreement Times');
     }
     return (
         <div className="addpro_form">
@@ -16,7 +16,7 @@ function PaidTimes() {
                     <div className="col lg-5">
                         <div className="user_name">
                             <h2>View your Payed Times<strong>(</strong>
-                            {link != 'Reguler Times'?'Reguler Times':'Agreement Times'}
+                            {link != 'regular Times'?'regular Times':'Agreement Times'}
                             <strong>)</strong></h2>
                         </div>
                     </div>
@@ -30,7 +30,7 @@ function PaidTimes() {
                 </div>
                 <div className="add_time">
                 {
-                    link != 'Reguler Times'?<RegulerTimesTable />:<AgreementTimesTable />
+                    link != 'regular Times'?<RegularTimesTable />:<AgreementTimesTable />
                 }
             </div>
         </div>

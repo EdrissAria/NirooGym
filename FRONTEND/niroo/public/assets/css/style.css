@@ -74,10 +74,12 @@ ul.navbar_nav{
     border-bottom-right-radius: 1.5rem;
     padding: 0.3rem 1rem;
     margin: 0.5rem 0;
+    cursor: pointer;
     background-color: #ffffff;
 }
 .navbar_nav .btn-search img{
      width: 1.2rem;
+     transform: rotateY(180deg);
 }
 /*>>>>>>>> side bar style<<<<<<<<*/
 aside.sidebar{
@@ -210,25 +212,49 @@ aside.sidebar{
 .card_2{
     height: 107px;
     background: transparent linear-gradient(
-        112deg, #fe7379 0%, #f54ea1 100%
+        112deg, #fed973 0%, #ff9c63 100%
     );
-    box-shadow: 0 16px 20px #ffb1d2;
+    box-shadow: 0 16px 20px #fff3b1;
     opacity: 1;
 }
 .card_3{
     height: 107px;
     background: transparent linear-gradient(
-        112deg, #b050d1 0%, #2b26a7 100%
+        112deg, #ff5c64 0%, #e43939 100%
     );
-    box-shadow: 0 16px 20px #cfacff;
+    box-shadow: 0 16px 20px #ffacac;
     opacity: 1;
 }
 .card_4{
     height: 107px;
     background: transparent linear-gradient(
-        112deg, #19e7da 0%, #6078ea 100%
+        112deg, #ff56b0 0%, #ff2197 100%
     );
-    box-shadow: 0 16px 20px #3eace266;
+    box-shadow: 0 16px 20px #e23ea366;
+    opacity: 1;
+}
+.card_5{
+    height: 107px;
+    background: transparent linear-gradient(
+        112deg, #ff4fe8 0%, #e221e2 100%
+    );
+    box-shadow: 0 16px 20px #e23ed466;
+    opacity: 1;
+}
+.card_6{
+    height: 107px;
+    background: transparent linear-gradient(
+        112deg, #b75eff 0%, #9b26d1 100%
+    );
+    box-shadow: 0 16px 20px #8a3ee266;
+    opacity: 1;
+}
+.card_7{
+    height: 107px;
+    background: transparent linear-gradient(
+        112deg, #19b7e7 0%, #5069e6 100%
+    );
+    box-shadow: 0 16px 20px #1b547066;
     opacity: 1;
 }
 .graph_sec{
@@ -262,6 +288,10 @@ aside.sidebar{
     color: #2b2b2b;
     font-size: 14px;
     font-weight: 500;
+}
+.currency{
+    font-size: 16px;
+    color:rgb(82, 82, 82);
 }
 /*>>>>>>>> graph area style<<<<<<<<*/
 

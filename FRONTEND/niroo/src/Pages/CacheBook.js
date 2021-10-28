@@ -12,9 +12,9 @@ function CacheBook() {
     const getBook = useQuery('book', api.getBook);
     const addBook = useMutation(api.addBook);
 
-    if(addBook.isSuccess){
-        window.location.reload();
-    }
+    // if(addBook.isSuccess){
+    //     window.location.reload();
+    // }
 
     const initialValues = {
         amount: '',

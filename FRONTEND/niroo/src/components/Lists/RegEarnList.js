@@ -9,7 +9,7 @@ function RegEarnList({ earn }) {
             <td>{earn.amount}</td>
             <td>{earn.write_by}</td>
             <td>{earn.date}</td>
-            <td><Link t="#" className="btn btn-info">view</Link></td>
+            <td><Link to={`/ViewEarnings/${earn.type}/${earn.reg_id}`} className="btn btn-primary">View</Link></td>
         </tr>
     )
 }

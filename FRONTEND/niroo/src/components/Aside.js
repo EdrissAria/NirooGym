@@ -9,6 +9,7 @@ function Aside() {
                 <li><Link to="/" title="Dashboard"><img src="/assets/img/home.png"/></Link></li>
                 <li><Link to="/users" title="Users"><img src="/assets/img/user.png"/></Link></li>
                 <li><Link to="/staff" title="Staff"><img src="/assets/img/stuff.png"/></Link></li>
+                <li><Link to="/loans" title="Loans"><img src="/assets/img/loan.png"/></Link></li>
                 <li><Link to="/parking" title="Parking"><img src="/assets/img/parking.png"/></Link></li>
                 <li><Link to="/logout" title="Log out"><img src="/assets/img/exit.png"/></Link></li>
             </ul>

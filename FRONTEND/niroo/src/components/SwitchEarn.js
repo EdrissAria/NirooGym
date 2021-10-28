@@ -11,12 +11,12 @@ function SwitchEarn({ earn }) {
         case 'agreement_time':
             return (
                 <>
-                    {getEarn.isLoading?"loading..":(getEarn.isSuccess ? <table className="table table-striped mt-5">
+                    {getEarn.isLoading ? "loading.." : (getEarn.isSuccess ? <table className="table table-striped mt-5">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Earning</th>
-                                <th>Receipt</th>
+                                <th>Recived</th>
                                 <th>Write by</th>
                                 <th>Date</th>
                                 <th>View</th>
@@ -36,12 +36,12 @@ function SwitchEarn({ earn }) {
         case 'regular_time':
             return (
                 <>
-                    {getEarn.isLoading?"loading..":(getEarn.isSuccess ? <table className="table table-striped mt-5">
+                    {getEarn.isLoading ? "loading.." : (getEarn.isSuccess ? <table className="table table-striped mt-5">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Earning</th>
-                                <th>Amount</th>
+                                <th>Recived</th>
                                 <th>Write by</th>
                                 <th>Date</th>
                                 <th>View</th>
@@ -61,7 +61,7 @@ function SwitchEarn({ earn }) {
         case 'parking':
             return (
                 <>
-                    {getEarn.isLoading?"loading..":(getEarn.isSuccess ? <table className="table table-striped mt-5">
+                    {getEarn.isLoading ? "loading.." : (getEarn.isSuccess ? <table className="table table-striped mt-5">
                         <thead>
                             <tr>
                                 <th>No</th>

@@ -12,13 +12,20 @@ export const getSingleStaff = (id) => api.get(`/getSingleStaff.php?id=${id}`).th
 export const getSingleReg = (id) => api.get(`/getSingleReg.php?id=${id}`).then(res => res.data);
 export const getSingleAgr = (id) => api.get(`/getSingleAgr.php?id=${id}`).then(res => res.data);
 export const getReceipts = (id) => api.get(`/getReceipts.php?id=${id}`).then(res => res.data);
+export const getAgrReg = (id) => api.get(`/getAgrReg.php?id=${id}`).then(res => res.data);
+export const getSingleTime = (id, earn) => api.get(`/getSingleTime.php?earn=${earn}&id=${id}`).then(res=> res.data);
 export const getStaff = () => api.get('/getStaff.php').then(res => res.data);
+export const getLoan = () => api.get('/getLoan.php').then(res => res.data);
 export const getParking = () => api.get('/getParking.php').then(res => res.data);
 export const getBook = () => api.get('/getBook.php').then(res => res.data);
 export const getExpence = () => api.get('/getExpences.php').then(res => res.data);
 export const getRegtime = (status) => api.get(`/getRegtime.php?status=${status}`).then(res => res.data);
 export const getAgrtime = (status) => api.get(`/getAgrtime.php?status=${status}`).then(res => res.data);
 export const getPayedRegtime = () => api.get('/getPayedRegtime.php').then(res => res.data);
+export const getBank = () => api.get('/getBank.php').then(res => res.data);
+export const getInfo = () => api.get('/getInfo.php').then(res => res.data);
+export const getData = () => api.get('/getData.php').then(res => res.data);
+
 
 //actions delete, update ...
 
@@ -33,7 +40,11 @@ export const deleteStaff = async (id) => {
     const response = await api.get(`/deleteStaff.php?id=${id}`)
     console.log(response)
 }
-
+//delete loans 
+export const deleteLoan = async (id) => {
+    const response = await api.get(`/deleteLoan.php?id=${id}`)
+    console.log(response)
+}
 //update users 
 export const updateUser = async ({ id, ...updatedUser }) => {
     const { data } = await api.put(`/updateUser.php?id=${id}`, updatedUser);
@@ -45,19 +56,24 @@ export const updateStaff = async ({ id, ...updatedStaff }) => {
     const { data } = await api.put(`/updateStaff.php?id=${id}`, updatedStaff);
     return data;
 }
-// update reguler time 
+// update regular time 
 export const updateReg = async ({id, ...updatedReg}) => {
     const {data} = await api.put(`/updateReg.php?id=${id}`, updatedReg);
     return data;
 }
-// update reguler time 
+// update regular time 
 export const updateReceipt = async ({id, ...updatedRec}) => {
     const {data} = await api.put(`/updateReceipt.php?id=${id}`, updatedRec);
     return data;
 }
-// update status of reguler time 
+// update status of regular time 
 export const submitRegtime = async ({id, ...updatedSubmit}) => {
     const {data} = await api.put(`/submitRegtime.php?id=${id}`, updatedSubmit);
+    return data;
+}
+// update status of regular time 
+export const submitAgrtime = async ({id, ...updatedSubmit}) => {
+    const {data} = await api.put(`/submitAgrtime.php?id=${id}`, updatedSubmit);
     return data;
 }
 // update agreement time
@@ -69,7 +85,7 @@ export const updateAgrtime = async ({id, ...updatedAgr}) => {
 export const addUser = async (userdata) => {
     const { data } = await api.post('/insertUser.php', userdata);
 }
-// restore reguler times 
+// restore regular times 
 export const restoreReg = async (id)=>{
     const {data} = await api.get(`/restoreReg.php?id=${id}`);
     return data;
@@ -92,12 +108,17 @@ export const addExpense = async (expenseData) => {
     const { data } = await api.post('/insertExpense.php', expenseData);
     console.table(data)
 }
-//insert reguler time 
+//insert regular time 
 export const addRegtime = async (regtime) => {
     const { data } = await api.post('/insertRegtime.php', regtime);
     console.log(data);
 }
-//insert reguler time 
+//insert regular time of specific agreement time 
+export const addRegAgrtime = async (regtime) => {
+    const { data } = await api.post('/insertRegAgrtime.php', regtime);
+    console.log(data);
+}
+//insert regular time 
 export const addAgrtime = async (agrtime) => {
     const { data } = await api.post('/insertAgrtime.php', agrtime);
     console.log(data);
@@ -106,6 +127,16 @@ export const addAgrtime = async (agrtime) => {
 export const addReceipt = async (receipt) => {
     const { data } = await api.post('/insertReceipt.php', receipt);
     console.log(data);
+}
+//insert loans
+export const addLoan = async (loan) => {
+    const { data } = await api.post('/insertLoan.php', loan);
+    console.log(data);
+}
+// searching 
+export const searching = async (searchData)=>{
+    const {data} = await api.post('/search.php', searchData);
+    return data;
 }
 // uploading files 
 export const uploadFile = async (file) => {

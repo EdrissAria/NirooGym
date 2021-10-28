@@ -1,36 +1,44 @@
 import React from 'react'
+import * as api from './Api'
+import { useQuery } from 'react-query'
+import FinishedAgrtime from './Lists/FinishedAgrtime';
 
 function AgreementTimesTable() {
+    const getAgr = useQuery('finishedTime', () => api.getAgrtime('finish'));
+    if(getAgr.isSuccess){
+        console.log(getAgr.data)
     return (
         <div>
-             <table className="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>Amount</th>
-                            <th>Recived</th>
-                            <th>Play Date</th>
-                            <th>Play Time</th>
-                            <th>Cancel</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>edriss</td>
-                            <td>0345345345</td>
-                            <td>500</td>
-                            <td>500</td>
-                            <td>2021/2/1</td>
-                            <td>12:00 AM</td>
-                            <td>Not</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <table className="table agrTable table-striped text-center">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>phone</th>
+                        <th>Amount/Hour</th>
+                        <th>Recived</th>
+                        <th>Reminder</th>
+                        <th>Total</th>
+                        <th>Entry Date</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Play Days</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Wrote by</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     {
+                         getAgr.data.map(time=> <FinishedAgrtime key={time.agr_id} time={time}/>)
+                     }
+                </tbody>
+            </table>
         </div>
     )
+    }else{
+        return getAgr.isLoading?'loading...':null
+    }
 }
 
 export default AgreementTimesTable

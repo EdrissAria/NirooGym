@@ -12,9 +12,9 @@ function Parking() {
     const getPark = useQuery('parking', api.getParking);
     const addPark = useMutation(api.addPark);
 
-    if(addPark.isSuccess){
-        window.location.reload();
-    }
+    // if(addPark.isSuccess){
+    //     window.location.reload();
+    // }
 
     const options = [
         {key: 'Choes a vehicle', value: ''},

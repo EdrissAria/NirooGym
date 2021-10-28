@@ -42,7 +42,7 @@ function RegEdit() {
         return (
             <div className="addpro_form">
                 <div className="container">
-                    <Title linkTo="/registerdTime" title="Edit your" subTitle="Reguler Time" buttonValue="Registerd Times" />
+                    <Title linkTo="/registerdTime" title="Edit your" subTitle="regular Time" buttonValue="Registerd Times" />
                     <div className="add_time">
                         <Formik
                             initialValues={{

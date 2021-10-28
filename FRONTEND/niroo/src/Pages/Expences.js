@@ -11,9 +11,9 @@ import Title from '../components/Title'
 function Expences() {
     const getExpence = useQuery('expence', api.getExpence);
     const addExpense = useMutation(api.addExpense)
-    if(addExpense.isSuccess){
-        window.location.reload();
-    }
+    // if(addExpense.isSuccess){
+    //     window.location.reload();
+    // }
     const initialValues = {
         type: '',
         amount: ''

@@ -1,10 +1,11 @@
 import React from 'react'
-import * as api from '../components/Api'
+import * as api from './Api'
 import { useQuery } from 'react-query'
 import FinishedRegtime from './Lists/FinishedRegtime';
 
-function RegulerTimesTable() {
+function RegularTimesTable() {
     const getReg = useQuery('finishedTime', () => api.getRegtime('finish'));
+
     if (getReg.isSuccess) {
         return (
             <div>
@@ -35,4 +36,4 @@ function RegulerTimesTable() {
     }
 }
 
-export default RegulerTimesTable
+export default RegularTimesTable

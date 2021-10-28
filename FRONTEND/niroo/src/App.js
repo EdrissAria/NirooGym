@@ -18,6 +18,9 @@ import StaffUpdate from './Pages/StaffUpdate'
 import RegEdit from './Pages/RegEdit'
 import SingleAgrTime from './components/Lists/SingleAgrTime'
 import UpdateAgr from './Pages/UpdateAgr'
+import ViewEarningsPage from './Pages/ViewEarningsPage'
+import Loans from './Pages/Loans'
+import Bank from './Pages/Bank'
 
 function App() {
     return (
@@ -36,6 +39,9 @@ function App() {
                 <Route path="/staff" component={Staff} />
                 <Route path="/users" component={Users} />
                 <Route path="/parking" component={Parking} />
+                <Route path="/loans" component={Loans} />
+                <Route path="/bank" component={Bank} />
+                <Route path="/ViewEarnings/:earn/:id" component={ViewEarningsPage} />
                 <Route path="/userUpdate/:id" component={UserUpdate} />
                 <Route path="/staffUpdate/:id" component={StaffUpdate} />
                 <Route path="/regEdit/:id" component={RegEdit} />
