@@ -6,7 +6,7 @@ import FinishedAgrtime from './Lists/FinishedAgrtime';
 function AgreementTimesTable() {
     const getAgr = useQuery('finishedTime', () => api.getAgrtime('finish'));
     if(getAgr.isSuccess){
-        console.log(getAgr.data)
+         
     return (
         <div>
             <table className="table agrTable table-striped text-center">
@@ -17,8 +17,6 @@ function AgreementTimesTable() {
                         <th>phone</th>
                         <th>Amount/Hour</th>
                         <th>Recived</th>
-                        <th>Reminder</th>
-                        <th>Total</th>
                         <th>Entry Date</th>
                         <th>Start Date</th>
                         <th>End Date</th>
@@ -26,6 +24,7 @@ function AgreementTimesTable() {
                         <th>Time</th>
                         <th>Status</th>
                         <th>Wrote by</th>
+                        <th>Total</th>
                     </tr>
                 </thead>
                 <tbody>

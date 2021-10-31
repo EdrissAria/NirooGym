@@ -9,7 +9,7 @@ function Bank() {
     const bank = useQuery('bank', api.getBank);
     
     if (bank.isSuccess) {
-        console.log(bank.data);
+         
         return (
             <div className="graph_area">
                 <div className="container">

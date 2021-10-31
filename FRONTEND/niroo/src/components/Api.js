@@ -32,18 +32,15 @@ export const getData = () => api.get('/getData.php').then(res => res.data);
 //delete user
 export const deleteUser = async (id) => {
     const response = await api.get(`/deleteUser.php?id=${id}`)
-    console.log(response)
 }
 
 //delete staff 
 export const deleteStaff = async (id) => {
     const response = await api.get(`/deleteStaff.php?id=${id}`)
-    console.log(response)
 }
 //delete loans 
 export const deleteLoan = async (id) => {
     const response = await api.get(`/deleteLoan.php?id=${id}`)
-    console.log(response)
 }
 //update users 
 export const updateUser = async ({ id, ...updatedUser }) => {
@@ -101,37 +98,30 @@ export const addPark = async (parkData) => {
 //insert book tax 
 export const addBook = async (bookData) => {
     const { data } = await api.post('/insertBook.php', bookData);
-    console.table(data)
 }
 //insert Expenses 
 export const addExpense = async (expenseData) => {
     const { data } = await api.post('/insertExpense.php', expenseData);
-    console.table(data)
 }
 //insert regular time 
 export const addRegtime = async (regtime) => {
     const { data } = await api.post('/insertRegtime.php', regtime);
-    console.log(data);
 }
 //insert regular time of specific agreement time 
 export const addRegAgrtime = async (regtime) => {
     const { data } = await api.post('/insertRegAgrtime.php', regtime);
-    console.log(data);
 }
 //insert regular time 
 export const addAgrtime = async (agrtime) => {
     const { data } = await api.post('/insertAgrtime.php', agrtime);
-    console.log(data);
 }
 //insert receipt
 export const addReceipt = async (receipt) => {
     const { data } = await api.post('/insertReceipt.php', receipt);
-    console.log(data);
 }
 //insert loans
 export const addLoan = async (loan) => {
     const { data } = await api.post('/insertLoan.php', loan);
-    console.log(data);
 }
 // searching 
 export const searching = async (searchData)=>{

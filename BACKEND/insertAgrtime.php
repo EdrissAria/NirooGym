@@ -16,10 +16,11 @@ $playDays = $data['playDays'];
 $endDate = $data['endDate'];
 $time = $data['time'];
 $wrote_by = "M.Edriss";
+$total = 0;
 
 $recived = $recived == null?0:$recived;
 $endDate = $endDate == null?'undecided':$endDate;
  
 $play_days = json_encode(implode(",", array_values($playDays)));
 
-$func->addAgrtime($name, $phone, $amount, $recived, $startDate, $play_days, $endDate, $time, $wrote_by, $date);
+$func->addAgrtime($name, $phone, $amount, $recived, $startDate, $play_days, $endDate, $time, $wrote_by, $total,$date);

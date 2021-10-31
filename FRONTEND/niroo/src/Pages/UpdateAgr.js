@@ -87,7 +87,7 @@ if(singleTime.isSuccess){
                                                 <FormControl control='input' type='text' name='amount' label='Amount per hour' placeholder='amount' />
                                             </div>
                                             <div className="col-lg-6 mt-3">
-                                                <FormControl control='input' type='text' name='recived' disabled label='Recived' placeholder='recived' />
+                                                <FormControl control='input' type='text' name='recived' placeholder='recived' />
                                             </div>
                                             <div className="col-lg-12 mt-3">
                                                 <FormControl control='checkboxU' selected={singleTime.data.play_days} name='playDays' options={options} label='Play Days' />

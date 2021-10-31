@@ -28,7 +28,7 @@ function AgrList({ time }) {
             name: time.name,
             phone: time.phone,
             amount: time.amount_per_hour,
-            recived: time.recived,
+            recived: values.receipt,
             reminder: 0,
             entry_date: time.entry_date,
             time: time.time,

@@ -40,7 +40,6 @@ function AgreementTime() {
         amount: Yup.number().positive('! must be positive').required('! Required'),
         recived: Yup.number().positive('! must be positive'),
         startDate: Yup.date().required('! Required'),
-        endDate: Yup.date().required('! Required'),
         time: Yup.string().required('! Required'),
         playDays: Yup.array().required('! Required').min(1, 'Choose an option')
     })
@@ -56,7 +55,7 @@ function AgreementTime() {
             playDays: values.playDays,
             time: values.time,
         }
-        // console.log(agrData.playDays)
+       
         addAgr.mutate(agrData)
     }
 

@@ -3,7 +3,6 @@ import Title from '../Title'
 import * as api from '../Api'
 import { useQuery } from 'react-query'
 import { useParams, Link } from 'react-router-dom'
-import ReceiptList from './ReceiptList'
 import AgrRegList from './AgrRegList'
 
 function SingleAgrTime() {

@@ -253,13 +253,13 @@ class Functions{
         }
     }
      // insert agreement time into database
-    public function addAgrtime($name, $phone, $amount, $recived, $startDate, $playDays, $endDate, $time, $wrote_by , $date){
+    public function addAgrtime($name, $phone, $amount, $recived, $startDate, $playDays, $endDate, $time, $wrote_by , $total, $date){
         if($name && $phone && $amount && $startDate && $playDays && $time && $wrote_by && $date){
             $select = $this->db->con->query("SELECT * FROM custommer WHERE phone = '$phone';");
             $selectRow = mysqli_fetch_assoc($select);
             if($selectRow){
-            $query = "INSERT INTO agreement_time (custommer_id, amount_per_hour, recived, entry_date, start_date, end_date, play_days, time, status, wrote_by) 
-            VALUES ({$selectRow['custommer_id']}, {$amount}, {$recived}, '$date', '$startDate', '$endDate', {$playDays}, '$time','waiting','$wrote_by');";
+            $query = "INSERT INTO agreement_time (custommer_id, amount_per_hour, recived, entry_date, start_date, end_date, play_days, time, status, wrote_by, total) 
+            VALUES ({$selectRow['custommer_id']}, {$amount}, {$recived}, '$date', '$startDate', '$endDate', {$playDays}, '$time','waiting','$wrote_by', {$recived});";
             $insertTime = $this->db->con->query($query);
             if($insertTime){
                 $select = $this->db->con->query("SELECT * FROM agreement_time ORDER BY agr_id DESC LIMIT 1");
@@ -285,8 +285,8 @@ class Functions{
                         $select = $this->db->con->query("SELECT * FROM custommer ORDER BY custommer_id DESC LIMIT 1");
                         $row = mysqli_fetch_assoc($select);
                         if($select){
-                            $query = "INSERT INTO agreement_time (custommer_id, amount_per_hour, recived,entry_date, start_date, end_date, play_days, time, status, wrote_by) 
-                            VALUES ({$row['custommer_id']}, {$amount}, {$recived}, '$date', '$startDate', '$endDate', {$playDays}, '$time','waiting','$wrote_by');";
+                            $query = "INSERT INTO agreement_time (custommer_id, amount_per_hour, recived,entry_date, start_date, end_date, play_days, time, status, wrote_by, total) 
+                            VALUES ({$row['custommer_id']}, {$amount}, {$recived}, '$date', '$startDate', '$endDate', {$playDays}, '$time','waiting','$wrote_by', {$recived});";
                             $insertTime = $this->db->con->query($query);
                             if($insertTime){
                                 $select = $this->db->con->query("SELECT * FROM agreement_time ORDER BY agr_id DESC LIMIT 1");
@@ -326,9 +326,10 @@ class Functions{
                 $select = $this->db->con->query("SELECT * FROM regular_time ORDER BY reg_id DESC LIMIT 1");
                 $row = mysqli_fetch_assoc($select);
                 $query = "INSERT INTO earnings (reg_id, type, amount, status, write_by, date) VALUES(
-                    {$row['reg_id']},'regular_time', {$amount}, 'finish', 'M.Edriss', '$date');";
-                $query .= "UPDATE earnings SET amount = ({$amount} + amount), date = '$date' WHERE agr_id = {$agr_id};";
+                    {$row['reg_id']},'regular_time', {$recived}, 'finish', 'M.Edriss', '$date');";
+                $query .= "UPDATE agreement_time SET total = ({$recived} + total) WHERE agr_id = {$agr_id};";
                 $insertEarn = $this->db->con->multi_query($query); 
+                while(mysqli_next_result($this->db->con)){;}
                 if($insertEarn){
                     $this->addBank($date);
                     echo 'earn add successfully';
@@ -624,12 +625,12 @@ class Functions{
         }
     }
     // update agreement time 
-    public function updateAgr($id, $name, $phone, $amount, $recived, $reminder, $total, $startDate, $playDays, $endDate, $time, $wrote_by , $date){
+    public function updateAgr($id, $name, $phone, $amount, $recived, $startDate, $playDays, $endDate, $time, $wrote_by , $date){
         if($name && $phone && $amount && $startDate && $playDays && $time && $wrote_by && $date){
             $query = "UPDATE custommer SET name = '$name', phone = '$phone' WHERE custommer_id = {$id};";
             $updateCustommer = $this->db->con->query($query);
             if($updateCustommer){
-                    $query = "UPDATE agreement_time SET amount_per_hour = {$amount}, recived = {$recived}, reminder = {$reminder}, total_amount = {$total}, start_date = '$startDate', end_date = '$endDate', play_days = {$playDays}, time = '$time' WHERE custommer_id = {$id};";
+                    $query = "UPDATE agreement_time SET amount_per_hour = {$amount}, recived = {$recived}, start_date = '$startDate', end_date = '$endDate', play_days = {$playDays}, time = '$time' WHERE custommer_id = {$id};";
                     $updateTime = $this->db->con->query($query);
                     if($updateTime){
                         echo 'agreement time updated successfully';

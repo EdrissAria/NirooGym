@@ -20,7 +20,7 @@ function RegularTimesTable() {
                             <th>Play Date</th>
                             <th>Play Time</th>
                             <th>Status</th>
-                            <th>Restoring</th>
+                            <th>Type</th>
                         </tr>
                     </thead>
                     <tbody>
