@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { useMutation } from 'react-query'
 import * as api from '../Api'
 
-function StaffList({staff}) {
+function StaffList({staff, no}) {
     const delStaff = useMutation(api.deleteStaff);
     if(delStaff.isSuccess){
         return <Redirect to='/staff' />
@@ -13,7 +13,7 @@ function StaffList({staff}) {
     }
     return (
         <tr>
-            <td>{staff.staff_id}</td> 
+            <td>{no + 1}</td> 
             <td>{staff.name}</td>
             <td>{staff.job}</td>
             <td>{staff.salary}</td>

@@ -101,7 +101,7 @@ function Staff() {
                     </thead>
                     <tbody>
                         {
-                            getStaff.data?.map(staff=><StaffList key={staff.staff_id} staff={staff}/>)
+                            getStaff.data?.map((staff, index) => <StaffList key={staff.staff_id} staff={staff} no={index}/>)
                         }
                     </tbody>
                 </table>

@@ -87,7 +87,7 @@ function Parking() {
                         </thead>
                         <tbody>
                              {
-                                getPark.data?.map(park=><ParkList key={park.park_id} park={park}/>)
+                                getPark.data?.map((park, index)=><ParkList key={park.park_id} park={park} no={index}/>)
                              }
                         </tbody>
                     </table>

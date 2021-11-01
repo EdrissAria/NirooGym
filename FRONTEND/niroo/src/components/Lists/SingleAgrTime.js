@@ -19,8 +19,6 @@ function SingleAgrTime() {
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Name</th>
-                                    <th>phone</th>
                                     <th>Amount/Hour</th>
                                     <th>Recived</th>
                                     <th>Entry Date</th>
@@ -36,8 +34,6 @@ function SingleAgrTime() {
                             <tbody>
                                 <tr>
                                     <td>{viewAgr.data.agr_id}</td>
-                                    <td>{viewAgr.data.name}</td>
-                                    <td>{viewAgr.data.phone}</td>
                                     <td>{viewAgr.data.amount_per_hour}</td>
                                     <td>{viewAgr.data.recived}</td>
                                     <td>{viewAgr.data.entry_date}</td>
@@ -47,7 +43,7 @@ function SingleAgrTime() {
                                     <td>{viewAgr.data.time}</td>
                                     <td>{viewAgr.data.status}</td>
                                     <td>{viewAgr.data.wrote_by}</td>
-                                    <td><Link to={`/updateAgreementTime/${viewAgr.data.custommer_id}`} className="btn btn-sm btn-warning">Edit</Link></td>
+                                    <td><Link to={`/updateAgreementTime/${viewAgr.data.agr_id}`} className="btn btn-sm btn-warning">Edit</Link></td>
                                 </tr>
                             </tbody>
                         </table>

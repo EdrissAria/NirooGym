@@ -8,9 +8,7 @@ require('objects.php');
 $id = $_GET['id'];
 
 $data = json_decode(file_get_contents("php://input"), true);
-
-$name = $data['name'];
-$phone = $data['phone'];
+ 
 $amount = $data['amount'];
 $recived = $data['recived'];
 $reminder = $data['recived'];
@@ -21,4 +19,4 @@ $recived = $recived == null || $recived == 0?0:$recived;
 $reminder = $recived == null || $recived == 0?$amount - $recived:$reminder;
 $reminder = $recived != null || $recived != 0?$amount - $recived:$reminder;
  
-$func->updateReg($id, $name, $phone, $amount,  $recived, $reminder, $date, $time);
+$func->updateReg($id , $amount,  $recived, $reminder, $date, $time);

@@ -3,7 +3,7 @@ import {useMutation} from 'react-query'
 import { Redirect } from 'react-router-dom';
 import * as api from '../Api'
 
-function LoanList({loan}) {
+function LoanList({loan, no}) {
     const delLoan = useMutation(api.deleteLoan);
     if(delLoan.isSuccess){
         return <Redirect to='/loans' />
@@ -13,7 +13,7 @@ function LoanList({loan}) {
     }
     return (
         <tr>
-            <td>{loan.loan_id}</td>
+            <td>{no + 1}</td>
             <td>{loan.name}</td>
             <td>{loan.phone}</td>
             <td>{loan.amount}</td>

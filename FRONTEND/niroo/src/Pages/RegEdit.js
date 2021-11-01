@@ -16,8 +16,6 @@ function RegEdit() {
     }
 
     const validationSchema = Yup.object({
-        name: Yup.string().required('! Required'),
-        phone: Yup.string().required('! Required'),
         amount: Yup.number().positive('! must be positive').required('! Required'),
         recived: Yup.number().integer('! must be a number'),
         reminder: Yup.number().integer('! must be a number'),
@@ -28,8 +26,6 @@ function RegEdit() {
     const onSubmit = values => {
         const regdata = {
             id: id,
-            name: values.name,
-            phone: values.phone,
             amount: values.amount,
             recived: values.recived,
             reminder: values.reminder,
@@ -46,8 +42,6 @@ function RegEdit() {
                     <div className="add_time">
                         <Formik
                             initialValues={{
-                                name: getReg.data.name,
-                                phone: getReg.data.phone,
                                 amount: getReg.data.amount,
                                 recived: getReg.data.recived,
                                 reminder: getReg.data.reminder,
@@ -62,12 +56,6 @@ function RegEdit() {
                                     return (
                                         <Form>
                                             <div className="row">
-                                                <div className="col-lg-6">
-                                                    <FormControl control='input' type='text' name='name' placeholder='name' label='Customer Name' />
-                                                </div>
-                                                <div className="col-lg-6">
-                                                    <FormControl control='input' type='text' name='phone' placeholder='phone' label='Customer Phone' />
-                                                </div>
                                                 <div className="col-lg-4 mt-3">
                                                     <FormControl control='input' type='text' name='amount' placeholder='amount' label='Amount' />
                                                 </div>

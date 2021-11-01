@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom'
 import * as api from '../Api';
 import { useMutation } from 'react-query'
 
-function WaitingTime({ waiting }) {
+function WaitingTime({ waiting, no }) {
     const [cancel, setCancel] = useState(false);
     const subTime = useMutation(api.submitRegtime);
 
@@ -21,7 +21,7 @@ function WaitingTime({ waiting }) {
     }
     return (
         <tr>
-            <td>{waiting.reg_id}</td>
+            <td>{no + 1}</td>
             <td>{waiting.name}</td>
             <td>{waiting.phone}</td>
             <td>{waiting.amount}</td>
@@ -30,7 +30,7 @@ function WaitingTime({ waiting }) {
             <td>{waiting.play_date}</td>
             <td>{waiting.time}</td>
             <td className="ck"><input type="checkbox" onChange={()=>setCancel(!cancel)}/></td>
-            <td><Link to={`/regEdit/${waiting.custommer_id}`} className="btn btn-warning">Edit</Link></td>
+            <td><Link to={`/regEdit/${waiting.reg_id}`} className="btn btn-warning">Edit</Link></td>
             <td><button onClick={() => submitTime(waiting.reg_id)} className="btn btn-success">Submit</button></td>
         </tr>
     )

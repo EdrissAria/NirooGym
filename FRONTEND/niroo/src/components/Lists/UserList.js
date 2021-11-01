@@ -3,7 +3,7 @@ import * as api from '../Api'
 import { useQuery, useMutation} from 'react-query'
 import {Link, Redirect} from 'react-router-dom'
 
-function UserList({ user }) {
+function UserList({ user, no }) {
 
     const info = useMutation(api.deleteUser);
     if(info.isSuccess){
@@ -13,10 +13,9 @@ function UserList({ user }) {
         info.mutate(id)
     }
 
-    
     return (
         <tr>
-            <td>{user.user_id}</td>
+            <td>{no + 1}</td>
             <td>{user.username}</td>
             <td><img className='user_photo' src={`./assets/upload/${user.photo}`} /></td>
             <td>{user.position}</td>

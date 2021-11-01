@@ -29,7 +29,7 @@ function AgreementTimesTable() {
                 </thead>
                 <tbody>
                      {
-                         getAgr.data.map(time=> <FinishedAgrtime key={time.agr_id} time={time}/>)
+                         getAgr.data.map((time, index)=> <FinishedAgrtime key={time.agr_id} time={time} no={index}/>)
                      }
                 </tbody>
             </table>

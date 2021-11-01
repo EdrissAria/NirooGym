@@ -3,11 +3,11 @@ import {Redirect} from 'react-router-dom'
 import * as api from '../Api'
 import { useQuery } from 'react-query'
  
-function FinishedRegtime({ reg }) {
+function FinishedRegtime({ reg, no }) {
      
     return (
         <tr>
-            <td>{reg.reg_id}</td>
+            <td>{no + 1}</td>
             <td>{reg.name}</td>
             <td>{reg.phone}</td>
             <td>{reg.amount}</td>

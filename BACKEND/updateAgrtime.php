@@ -8,9 +8,7 @@ require('objects.php');
 $id = $_GET['id'];
 
 $data = json_decode(file_get_contents("php://input"), true);
-
-$name = $data['name'];
-$phone = $data['phone'];
+ 
 $amount = $data['amount'];
 $recived = $data['recived'];
 $startDate = $data['startDate'];
@@ -25,5 +23,5 @@ $endDate = $endDate == null?'undecided':$endDate;
  
 $play_days = json_encode(implode(",", array_values($playDays)));
 
-$func->updateAgr($id, $name, $phone, $amount, $recived, 
+$func->updateAgr($id, $amount, $recived, 
 $startDate, $play_days, $endDate, $time, $wrote_by, $date);

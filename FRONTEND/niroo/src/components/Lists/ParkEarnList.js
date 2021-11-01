@@ -1,9 +1,9 @@
 import React from 'react'
 
-function ParkEarnList({earn}) {
+function ParkEarnList({earn, no}) {
     return (
         <tr>
-            <td>{earn.earning_id}</td>
+            <td>{no + 1}</td>
             <td>{earn.type}</td>
             <td>{earn.amount}</td>
             <td>{earn.write_by}</td>

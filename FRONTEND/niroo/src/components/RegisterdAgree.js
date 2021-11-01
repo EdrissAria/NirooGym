@@ -26,7 +26,7 @@ function RegisterdAgree() {
                     </thead>
                     <tbody>
                         {
-                            getAgr.data?getAgr.data.map((time)=><AgrList key={time.agr_id} time={time} />):null
+                            getAgr.data?getAgr.data.map((time, index)=><AgrList key={time.agr_id} time={time} no={index} />):null
                         }
                     </tbody>
                 </table>

@@ -25,8 +25,6 @@ function UpdateAgr() {
     ]
  
     const validationSchema = Yup.object({
-        name: Yup.string().required('! Required'),
-        phone: Yup.string().required('! Required'),
         amount: Yup.number().positive('! must be positive').required('! Required'),
         recived: Yup.number().integer('! must be an integer'),
         startDate: Yup.date().required('! Required'),
@@ -37,8 +35,6 @@ function UpdateAgr() {
     const onSubmit = values =>{
         const agrData = {
             id: id,
-            name: values.name,
-            phone: values.phone,
             amount: values.amount,
             recived: values.recived,
             startDate: values.startDate,
@@ -59,8 +55,6 @@ if(singleTime.isSuccess){
                     <Formik
                         initialValues={
                             {
-                                name: singleTime.data.name,
-                                phone: singleTime.data.phone,
                                 amount: singleTime.data.amount_per_hour,
                                 recived: singleTime.data.recived,
                                 startDate: singleTime.data.start_date,
@@ -77,17 +71,11 @@ if(singleTime.isSuccess){
                                 return (
                                     <Form>
                                         <div className="row">
-                                            <div className="col-lg-6">
-                                                <FormControl control='input' type='text' name='name' label='Custommer Name' placeholder='name' />
-                                            </div>
-                                            <div className="col-lg-6">
-                                                <FormControl control='input' type='text' name='phone' label='Custommer Phone' placeholder='phone' />
-                                            </div>
                                             <div className="col-lg-6 mt-3">
                                                 <FormControl control='input' type='text' name='amount' label='Amount per hour' placeholder='amount' />
                                             </div>
                                             <div className="col-lg-6 mt-3">
-                                                <FormControl control='input' type='text' name='recived' placeholder='recived' />
+                                                <FormControl control='input' type='text' name='recived' placeholder='recived' label="Recived" />
                                             </div>
                                             <div className="col-lg-12 mt-3">
                                                 <FormControl control='checkboxU' selected={singleTime.data.play_days} name='playDays' options={options} label='Play Days' />

@@ -96,7 +96,7 @@ function Loans() {
                                     </thead>
                                     <tbody>
                                         {
-                                            getLoan.data.map(loan => <LoanList key={loan.loan_id} loan={loan} />)
+                                            getLoan.data.map((loan, index)=> <LoanList key={loan.loan_id} loan={loan} no={index} />)
                                         }
                                     </tbody>
                                 </table>

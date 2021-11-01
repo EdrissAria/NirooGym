@@ -429,10 +429,9 @@ class Functions{
         }
     }
     // getting single regular time from database 
-    public function getSingleReg($id, $table1 = 'custommer', $table2 = 'regular_time'){
+    public function getSingleReg($id, $table = 'regular_time'){
         if($id != null){
-            $result = $this->db->con->query("SELECT * FROM {$table1} INNER JOIN {$table2} 
-            ON {$table1}.custommer_id = {$table2}.custommer_id WHERE {$table1}.custommer_id = {$id};");
+            $result = $this->db->con->query("SELECT * FROM {$table} WHERE reg_id = {$id};");
             if($result){
                 $row = mysqli_fetch_assoc($result);
                 return json_encode($row);
@@ -444,10 +443,9 @@ class Functions{
         }
     }
     // get single agreement time 
-    public function getSingleAgr($id, $table1 = 'custommer', $table2 = 'agreement_time'){
+    public function getSingleAgr($id, $table = 'agreement_time'){
         if($id){
-            $query = "SELECT * FROM {$table1} INNER JOIN {$table2} ON custommer.custommer_id = agreement_time.custommer_id
-            WHERE custommer.custommer_id = {$id}";
+            $query = "SELECT * FROM {$table} WHERE agr_id = {$id}";
             $result = $this->db->con->query($query);
             if($result){
                 $row = mysqli_fetch_assoc($result);
@@ -528,11 +526,11 @@ class Functions{
         }
     }
     //updating regular times 
-    public function updateReg($id, $name, $phone, $amount, $recived, $reminder,$date, $time, $table1="custommer", $table2="regular_time"){
-        if($id != null && $name != null && $amount != null && $phone != null && $date != null && $time != null){
-                $query = "UPDATE {$table1} SET name = '$name', phone = '$phone' WHERE custommer_id = {$id};";
-                $query .= "UPDATE {$table2} SET amount = {$amount}, recived = {$recived}, reminder = {$reminder}, play_date = '$date', time = '$time' WHERE custommer_id = {$id};";
-                $result = $this->db->con->multi_query($query); 
+    public function updateReg($id,$amount, $recived, $reminder,$date, $time, $table="regular_time"){
+        if($id != null && $amount != null && $date != null && $time != null){
+                $query = "UPDATE {$table} SET amount = {$amount}, recived = {$recived}, reminder = {$reminder},
+                play_date = '$date', time = '$time' WHERE reg_id = {$id};";
+                $result = $this->db->con->query($query); 
                 if($result){
                     echo "regular time updated";
                 }else{
@@ -625,19 +623,16 @@ class Functions{
         }
     }
     // update agreement time 
-    public function updateAgr($id, $name, $phone, $amount, $recived, $startDate, $playDays, $endDate, $time, $wrote_by , $date){
-        if($name && $phone && $amount && $startDate && $playDays && $time && $wrote_by && $date){
-            $query = "UPDATE custommer SET name = '$name', phone = '$phone' WHERE custommer_id = {$id};";
-            $updateCustommer = $this->db->con->query($query);
-            if($updateCustommer){
-                    $query = "UPDATE agreement_time SET amount_per_hour = {$amount}, recived = {$recived}, start_date = '$startDate', end_date = '$endDate', play_days = {$playDays}, time = '$time' WHERE custommer_id = {$id};";
-                    $updateTime = $this->db->con->query($query);
-                    if($updateTime){
-                        echo 'agreement time updated successfully';
-                }else{
-                    echo 'failed';
-                }
-                
+    public function updateAgr($id,$amount, $recived, $startDate, $playDays, $endDate, $time, $wrote_by , $date){
+        if($id && $amount && $startDate && $playDays && $time && $wrote_by && $date){
+            $query = "UPDATE agreement_time SET amount_per_hour = {$amount}, recived = {$recived}, start_date = '$startDate',
+            end_date = '$endDate', play_days = {$playDays}, time = '$time' WHERE agr_id = {$id};";
+            $query .= "UPDATE earnings SET amount = {$recived} WHERE agr_id = {$id};";
+            $updateTime = $this->db->con->multi_query($query);
+            if($updateTime){
+                echo 'agreement time updated successfully';
+            }else{
+                echo 'failed';
             }
         }else{
             echo 'all field must be fill in';

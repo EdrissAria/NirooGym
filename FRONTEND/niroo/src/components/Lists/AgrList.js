@@ -6,7 +6,7 @@ import * as Yup from 'yup'
 import * as api from '../Api'
 import FormControl from '../FormControl'
 
-function AgrList({ time }) {
+function AgrList({ time, no }) {
     const [cancel, setCancel] = useState(false);
     const addReg = useMutation(api.addRegAgrtime);
     const subAgr = useMutation(api.submitAgrtime);
@@ -48,8 +48,9 @@ function AgrList({ time }) {
     }
     return (
         <tr>
-            <td>{time.agr_id}</td>
+            <td>{no + 1}</td>
             <td>{time.name}</td>
+            <td>{time.phone}</td>
             <td>{time.amount_per_hour}</td>
             <td>{time.recived}</td>
             <td className="ck"><input type="checkbox" onChange={() => setCancel(!cancel)} /></td>
@@ -70,7 +71,7 @@ function AgrList({ time }) {
                     }
                 </Formik>
             </td>
-            <td><Link to={`/viewAgreementTime/${time.custommer_id}`} className="btn btn-primary">View</Link></td>
+            <td><Link to={`/viewAgreementTime/${time.agr_id}`} className="btn btn-primary">View</Link></td>
             <td><button onClick={() => submitAgr(time.agr_id)} className="btn btn-warning">Submit</button></td>
         </tr>
 

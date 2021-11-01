@@ -25,7 +25,7 @@ function RegularTimesTable() {
                     </thead>
                     <tbody>
                         {
-                            getReg.data.map(reg => <FinishedRegtime key={reg.reg_id} reg={reg} />)
+                            getReg.data.map((reg, index) => <FinishedRegtime key={reg.reg_id} reg={reg} no={index}/>)
                         }
                     </tbody>
                 </table>

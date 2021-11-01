@@ -107,8 +107,8 @@ function Users() {
                                 </thead>
                                 <tbody>
                                     {
-                                        getUsers.data?.map(user => <UserList key={user.user_id} user={user} />)
-                                    }
+                                        getUsers.data?.map((user, index) => <UserList key={user.user_id} user={user} no={index}/>)    
+                                    }                                    
                                 </tbody>
                             </table>
                     </div>

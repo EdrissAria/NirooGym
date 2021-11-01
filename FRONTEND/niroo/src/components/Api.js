@@ -57,12 +57,7 @@ export const updateStaff = async ({ id, ...updatedStaff }) => {
 export const updateReg = async ({id, ...updatedReg}) => {
     const {data} = await api.put(`/updateReg.php?id=${id}`, updatedReg);
     return data;
-}
-// update regular time 
-export const updateReceipt = async ({id, ...updatedRec}) => {
-    const {data} = await api.put(`/updateReceipt.php?id=${id}`, updatedRec);
-    return data;
-}
+} 
 // update status of regular time 
 export const submitRegtime = async ({id, ...updatedSubmit}) => {
     const {data} = await api.put(`/submitRegtime.php?id=${id}`, updatedSubmit);

@@ -25,7 +25,7 @@ function RegisterdReg() {
                     </thead>
                     <tbody>
                        {
-                           regTime.data?.map(time=><WaitingTime key={time.reg_id} waiting={time}/>)
+                           regTime.data?.map((time, index)=><WaitingTime key={time.reg_id} waiting={time} no={index}/>)
                        }
                     </tbody>
                 </table>

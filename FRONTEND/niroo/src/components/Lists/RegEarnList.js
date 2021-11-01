@@ -1,10 +1,10 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-function RegEarnList({ earn }) {
+function RegEarnList({ earn, no }) {
     return (
         <tr>
-            <td>{earn.earning_id}</td>
+            <td>{no + 1}</td>
             <td>{earn.type}</td>
             <td>{earn.amount}</td>
             <td>{earn.write_by}</td>

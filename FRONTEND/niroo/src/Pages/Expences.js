@@ -78,7 +78,7 @@ function Expences() {
                         </thead>
                         <tbody>
                             {
-                                getExpence.data?.map(expense=><ExpencesList key={expense.expense_id} expense={expense}/>)
+                                getExpence.data?.map((expense, index)=><ExpencesList key={expense.expense_id} expense={expense} no={index}/>)
                             }
                         </tbody>
                     </table>

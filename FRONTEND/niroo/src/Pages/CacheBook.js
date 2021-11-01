@@ -80,7 +80,7 @@ function CacheBook() {
                         </thead>
                         <tbody>
                             {
-                                getBook.data?.map(book=><BookList key={book.cache_id} book={book}/>)
+                                getBook.data?.map((book, index)=><BookList key={book.cache_id} book={book} no={index}/>)
                             }
                         </tbody>
                     </table>

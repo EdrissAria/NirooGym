@@ -24,7 +24,7 @@ function SwitchEarn({ earn }) {
                         </thead>
                         <tbody>
                             {
-                                getEarn.data.map(earn => <AgrEarnList key={earn.earning_id} earn={earn} />)
+                                getEarn.data.map((earn, index) => <AgrEarnList key={earn.earning_id} earn={earn} no={index}/>)
                             }
                         </tbody>
                     </table>
@@ -49,7 +49,7 @@ function SwitchEarn({ earn }) {
                         </thead>
                         <tbody>
                             {
-                                getEarn.data.map(earn => <RegEarnList key={earn.earning_id} earn={earn} />)
+                                getEarn.data.map((earn, index) => <RegEarnList key={earn.earning_id} earn={earn} no={index}/>)
                             }
                         </tbody>
                     </table>
@@ -73,7 +73,7 @@ function SwitchEarn({ earn }) {
                         </thead>
                         <tbody>
                             {
-                                getEarn.data.map(earn => <ParkEarnList key={earn.earning_id} earn={earn} />)
+                                getEarn.data.map((earn, index) => <ParkEarnList key={earn.earning_id} earn={earn} no={index}/>)
                             }
                         </tbody>
                     </table>

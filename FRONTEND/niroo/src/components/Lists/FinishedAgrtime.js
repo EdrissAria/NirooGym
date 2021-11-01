@@ -1,9 +1,9 @@
 import React from 'react'
 
-function FinishedAgrtime({ time }) {
+function FinishedAgrtime({ time, no }) {
     return (
         <tr>
-            <td>{time.agr_id}</td>
+            <td>{no + 1}</td>
             <td>{time.name}</td>
             <td>{time.phone}</td>
             <td>{time.amount_per_hour}</td>
