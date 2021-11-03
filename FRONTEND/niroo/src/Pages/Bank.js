@@ -1,15 +1,11 @@
 import React from 'react'
-import { Link, Redirect } from 'react-router-dom'
 import * as api from '../components/Api'
-import { useMutation, useQuery } from 'react-query'
+import {useQuery } from 'react-query'
 import Title from '../components/Title'
 
 function Bank() {
-
     const bank = useQuery('bank', api.getBank);
-    
     if (bank.isSuccess) {
-         
         return (
             <div className="graph_area">
                 <div className="container">

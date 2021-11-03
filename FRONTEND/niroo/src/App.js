@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Header from './components/Header'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import RecordTime from './Pages/RecordTime'
 import RegisterdTime from './Pages/RegisterdTime'
 import Dashboard from './Pages/Dashboard'
@@ -21,12 +21,18 @@ import UpdateAgr from './Pages/UpdateAgr'
 import ViewEarningsPage from './Pages/ViewEarningsPage'
 import Loans from './Pages/Loans'
 import Bank from './Pages/Bank'
+import SearchPage from './Pages/SearchPage'
+import {Context} from './components/Contexts/ContextProvider'
+
 
 function App() {
+    const {searching} = useContext(Context);
+     
     return (
         <Router>
             <Header />
             <Aside />
+            {searching.isSuccess?<SearchPage />:
             <Switch>
                 <Route exact path="/" component={Dashboard} />
                 <Route path="/recordTime" component={RecordTime} />
@@ -41,6 +47,7 @@ function App() {
                 <Route path="/parking" component={Parking} />
                 <Route path="/loans" component={Loans} />
                 <Route path="/bank" component={Bank} />
+                <Route path="/search" component={SearchPage} />
                 <Route path="/ViewEarnings/:earn/:id" component={ViewEarningsPage} />
                 <Route path="/userUpdate/:id" component={UserUpdate} />
                 <Route path="/staffUpdate/:id" component={StaffUpdate} />
@@ -48,6 +55,7 @@ function App() {
                 <Route path="/viewAgreementTime/:id" component={SingleAgrTime}/>
                 <Route path="/updateAgreementTime/:id" component={UpdateAgr} />
             </Switch>
+            }
         </Router>
     )
 }

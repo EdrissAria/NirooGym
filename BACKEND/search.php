@@ -8,7 +8,5 @@ require('objects.php');
  
 
 $searchArray = array_keys($_POST);
- 
 $search = $searchArray[0]; 
- 
 echo $func->search($search);
