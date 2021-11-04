@@ -228,9 +228,9 @@ aside.sidebar{
 .card_4{
     height: 107px;
     background: transparent linear-gradient(
-        112deg, #ff56b0 0%, #ff2197 100%
+        112deg, #fe7379 0%, #f54ea1 100%
     );
-    box-shadow: 0 16px 20px #e23ea366;
+    box-shadow: 0 16px 20px#ffb1d2;
     opacity: 1;
 }
 .card_5{
@@ -244,17 +244,17 @@ aside.sidebar{
 .card_6{
     height: 107px;
     background: transparent linear-gradient(
-        112deg, #b75eff 0%, #9b26d1 100%
+        112deg, #b050d1 0%, #2b26a7 100%
     );
-    box-shadow: 0 16px 20px #8a3ee266;
+    box-shadow: 0 16px 20px #cfacff;
     opacity: 1;
 }
 .card_7{
     height: 107px;
     background: transparent linear-gradient(
-        112deg, #19b7e7 0%, #5069e6 100%
+        112deg, #19e7da 0%, #6078ea 100%
     );
-    box-shadow: 0 16px 20px #1b547066;
+    box-shadow: 0 16px 20px #3eace266;
     opacity: 1;
 }
 .graph_sec{

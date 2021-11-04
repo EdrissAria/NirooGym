@@ -5,8 +5,18 @@ import { useMutation } from 'react-query'
 import {Context} from './Contexts/ContextProvider';
 
 function Header() {
-    const {searchHandler, searching} = useContext(Context);
-    
+    //api for searching 
+    const searching = useMutation(api.searching);
+   
+    //search handler 
+    const searchHandler = (e) => {
+        searching.mutate(e.target.value);
+    }
+
+    const onsubmit = (e) =>{
+        e.preventDefault();
+        console.log(e.target.search)
+    }
     return (
         <header>
             <nav className="navbar navbar-expand-sm navbar-light bg-light navbar_light">
@@ -36,7 +46,7 @@ function Header() {
                     <div>
                         <ul className="navbar_nav">
                             <li className="navbar-nav mr-auto mt-2 mt-lg-0 nav-item">
-                                <form onSubmit={(e) => e.preventDefault()}>
+                                <form onSubmit={onsubmit}>
                                     <input type="text" name="search" onChange={searchHandler} placeholder="search here.." className="search" />
                                     <button type="submit" className="btn-search"><img src={'/assets/img/search.png'} /></button>
                                 </form>
