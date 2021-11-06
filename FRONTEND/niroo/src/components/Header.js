@@ -1,21 +1,22 @@
-import React, { useEffect, useState, useContext} from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import React, { useEffect, useState, useContext } from 'react'
+import { Link,useHistory } from 'react-router-dom'
 import * as api from './Api'
-import { useMutation } from 'react-query'
-import {Context} from './Contexts/ContextProvider';
+import { useMutation, useQuery } from 'react-query'
+import { Context } from './Contexts/ContextProvider';
 
 function Header() {
-    //api for searching 
-    const searching = useMutation(api.searching);
-   
-    //search handler 
-    const searchHandler = (e) => {
-        searching.mutate(e.target.value);
-    }
+    const history = useHistory();
 
-    const onsubmit = (e) =>{
-        e.preventDefault();
-        console.log(e.target.search)
+    const [search , setSearch] = useState('');
+    //api for searching 
+    const searching = useQuery(['searching', search], ()=> api.searching(search));
+    
+    //search handler 
+    const searchChanges = (e) => {
+        setSearch(e.target.value);
+    }
+    const searchHandler = () =>{
+        history.push(`/Search/${search}`) 
     }
     return (
         <header>
@@ -46,10 +47,8 @@ function Header() {
                     <div>
                         <ul className="navbar_nav">
                             <li className="navbar-nav mr-auto mt-2 mt-lg-0 nav-item">
-                                <form onSubmit={onsubmit}>
-                                    <input type="text" name="search" onChange={searchHandler} placeholder="search here.." className="search" />
-                                    <button type="submit" className="btn-search"><img src={'/assets/img/search.png'} /></button>
-                                </form>
+                                <input type="text" name="search" onChange={searchChanges}  placeholder="search here.." className="search" />
+                                <button onClick={searchHandler} className="btn-search"><img src={'/assets/img/search.png'} /></button>
                             </li>
                         </ul>
                     </div>

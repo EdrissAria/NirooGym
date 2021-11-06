@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link, Redirect} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import {Formik, Form} from 'formik'
 import * as Yup from 'yup'
 import FormControl from '../components/FormControl'
@@ -9,12 +9,13 @@ import ParkList from '../components/Lists/ParkList'
 import Title from '../components/Title'
 
 function Parking() {
+    const history = useHistory();
     const getPark = useQuery('parking', api.getParking);
     const addPark = useMutation(api.addPark);
 
-    // if(addPark.isSuccess){
-    //     window.location.reload();
-    // }
+    if(addPark.isSuccess){
+        history.push('/parking');
+    }
 
     const options = [
         {key: 'Choes a vehicle', value: ''},

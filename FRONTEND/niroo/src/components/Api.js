@@ -13,6 +13,7 @@ export const getSingleReg = (id) => api.get(`/getSingleReg.php?id=${id}`).then(r
 export const getSingleAgr = (id) => api.get(`/getSingleAgr.php?id=${id}`).then(res => res.data);
 export const getReceipts = (id) => api.get(`/getReceipts.php?id=${id}`).then(res => res.data);
 export const getAgrReg = (id) => api.get(`/getAgrReg.php?id=${id}`).then(res => res.data);
+export const searching = (searchData) => api.get(`/search.php?search=${searchData}`).then(res => res.data);
 export const getSingleTime = (id, earn) => api.get(`/getSingleTime.php?earn=${earn}&id=${id}`).then(res=> res.data);
 export const getStaff = () => api.get('/getStaff.php').then(res => res.data);
 export const getLoan = () => api.get('/getLoan.php').then(res => res.data);
@@ -118,11 +119,7 @@ export const addReceipt = async (receipt) => {
 export const addLoan = async (loan) => {
     const { data } = await api.post('/insertLoan.php', loan);
 }
-// searching 
-export const searching = async (searchData)=>{
-    const {data} = await api.post('/search.php', searchData);
-    return data;
-}
+ 
 // uploading files 
 export const uploadFile = async (file) => {
     return await api.post('/uploads.php', file, {

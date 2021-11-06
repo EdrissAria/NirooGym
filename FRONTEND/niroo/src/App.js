@@ -45,6 +45,7 @@ function App() {
                 <Route path="/parking" component={Parking} />
                 <Route path="/loans" component={Loans} />
                 <Route path="/bank" component={Bank} />
+                <Route path="/Search/:search" component={SearchPage} />
                 <Route path="/ViewEarnings/:earn/:id" component={ViewEarningsPage} />
                 <Route path="/userUpdate/:id" component={UserUpdate} />
                 <Route path="/staffUpdate/:id" component={StaffUpdate} />
