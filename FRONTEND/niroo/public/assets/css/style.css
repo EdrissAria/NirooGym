@@ -10,6 +10,7 @@ ul{
 .active{
     color:rgb(5, 170, 87);
 }
+
 /*____________________________Loading spinner_________________________________________*/
 .loading{
     animation: loading 2s linear 0s infinite;
@@ -65,7 +66,6 @@ div.form-group{
 ul.navbar_nav{
     margin: 0;
 }
- 
 .navbar_nav .btn-search{
     outline: none;
     border: 1px solid rgb(151, 151, 151);
@@ -433,3 +433,4 @@ td.ck input[type="checkbox"]:checked:before{
 /*>>>>>>>> product tabel style <<<<<<<<*/
 
 /*____________________________ Dashboard style _______________________________________ */
+ 

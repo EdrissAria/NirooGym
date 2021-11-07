@@ -10,13 +10,19 @@ function Header() {
     const [search , setSearch] = useState('');
     //api for searching 
     const searching = useQuery(['searching', search], ()=> api.searching(search));
-    
+    var requirdStyle = {}
     //search handler 
     const searchChanges = (e) => {
         setSearch(e.target.value);
     }
     const searchHandler = () =>{
-        history.push(`/Search/${search}`) 
+        if(search !== ''){
+            history.push(`/Search/${search}`)
+        }else{
+            requirdStyle = {
+                background: 'red'
+            }
+        } 
     }
     return (
         <header>
@@ -47,8 +53,8 @@ function Header() {
                     <div>
                         <ul className="navbar_nav">
                             <li className="navbar-nav mr-auto mt-2 mt-lg-0 nav-item">
-                                <input type="text" name="search" onChange={searchChanges}  placeholder="search here.." className="search" />
-                                <button onClick={searchHandler} className="btn-search"><img src={'/assets/img/search.png'} /></button>
+                                <input type="text" name="search" onChange={searchChanges} placeholder="search here.." style={requirdStyle} className="search" />
+                                <button onClick={searchHandler}  className="btn-search"><img src={'/assets/img/search.png'} /></button>
                             </li>
                         </ul>
                     </div>

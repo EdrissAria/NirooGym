@@ -11,11 +11,13 @@ import Title from '../components/Title'
 
 function SearchPage() {
     const { search } = useParams();
-
+    
     const searching = useQuery(['search', search], () => api.searching(search));
-
-
+    
     if (searching.isSuccess) {
+        if(searching.data.length < 1){
+            return <h2 style={{textAlign: 'center', marginTop: '30px'}}>No Result</h2>
+        }
         return (
             <div className="addpro_form">
                 <div className="container">
@@ -41,7 +43,7 @@ function SearchPage() {
                                 {
                                     searching.data.map(srch => (
                                         srch.agr_id == null?
-                                        <tr>
+                                        <tr key={srch.reg_id}>
                                             <td>{srch.reg_id}</td>
                                             <td>{srch.name}</td>
                                             <td>{srch.phone}</td>
@@ -55,7 +57,7 @@ function SearchPage() {
                                             <td>no action</td>
                                         </tr>
                                         :
-                                        <tr>
+                                        <tr key={srch.reg_id}>
                                             <td>{srch.reg_id}</td>
                                             <td>{srch.name}</td>
                                             <td>{srch.phone}</td>
@@ -76,8 +78,8 @@ function SearchPage() {
                 </div>
             </div>
         )
-    }else if(searching.data == 0){
-        return <h2>No result</h2>
+    }else if(searching.error){
+        return <h2 style={{color: 'red'}}>Failed: {searching.error}</h2>
     } 
     else {
         return searching.isLoading ? 'loading' : null;
