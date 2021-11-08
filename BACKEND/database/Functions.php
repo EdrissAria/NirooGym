@@ -927,8 +927,8 @@ class Functions
     {
         if ($search) {
             $query = "SELECT * FROM custommer INNER JOIN regular_time ON custommer.custommer_id = regular_time.custommer_id
-            WHERE name LIKE('%$search%') OR phone LIKE('%$search%') OR created_at LIKE('%$search%') OR amount LIKE('%$search%')
-            OR status LIKE('%$search%') OR entry_date LIKE('%$search%') OR play_date LIKE('%$search%') OR time LIKE('%$search%')
+            WHERE name LIKE('%$search%') OR phone LIKE('%$search%') OR created_at LIKE('%$search%') OR amount LIKE('%$search%') OR
+            recived LIKE('%$search%') OR status LIKE('%$search%') OR entry_date LIKE('%$search%') OR play_date LIKE('%$search%') OR time LIKE('%$search%')
             OR wrote_by LIKE('%$search%');";
 
             $result = $this->db->con->query($query);

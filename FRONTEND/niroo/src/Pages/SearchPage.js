@@ -36,29 +36,29 @@ function SearchPage() {
                                     <th>Play Time</th>
                                     <th>Wrote by</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    <th>View</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    searching.data.map(srch => (
+                                    searching.data.map((srch, index) => (
                                         srch.agr_id == null?
                                         <tr key={srch.reg_id}>
-                                            <td>{srch.reg_id}</td>
-                                            <td>{srch.name}</td>
-                                            <td>{srch.phone}</td>
-                                            <td>{srch.amount}</td>
-                                            <td>{srch.recived}</td>
-                                            <td>{srch.entry_date}</td>
-                                            <td>{srch.play_date}</td>
-                                            <td>{srch.time}</td>
-                                            <td>{srch.wrote_by}</td>
-                                            <td>{srch.status}</td>
+                                            <td>{++index}</td>
+                                            <td>{srch.name == search ?<span style={{background: 'yellow'}}>{srch.name}</span>:srch.name}</td>
+                                            <td>{srch.phone == search ?<span style={{background: 'yellow'}}>{srch.phone}</span>:srch.phone}</td>
+                                            <td>{srch.amount == search ?<span style={{background: 'yellow'}}>{srch.amount}</span>:srch.amount}</td>
+                                            <td>{srch.recived == search ?<span style={{background: 'yellow'}}>{srch.recived}</span>:srch.recived}</td>
+                                            <td>{srch.entry_date == search ?<span style={{background: 'yellow'}}>{srch.entry_date}</span>:srch.entry_date}</td>
+                                            <td>{srch.play_date == search ?<span style={{background: 'yellow'}}>{srch.play_date}</span>:srch.play_date}</td>
+                                            <td>{srch.time == search ?<span style={{background: 'yellow'}}>{srch.time}</span>:srch.time}</td>
+                                            <td>{srch.wrote_by == search ?<span style={{background: 'yellow'}}>{srch.wrote_by}</span>:srch.wrote_by}</td>
+                                            <td>{srch.status == search ?<span style={{background: 'yellow'}}>{srch.status}</span>:srch.status}</td>
                                             <td>no action</td>
                                         </tr>
                                         :
                                         <tr key={srch.reg_id}>
-                                            <td>{srch.reg_id}</td>
+                                            <td>{++index}</td>
                                             <td>{srch.name}</td>
                                             <td>{srch.phone}</td>
                                             <td>{srch.amount}</td>
