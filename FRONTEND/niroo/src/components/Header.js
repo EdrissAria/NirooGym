@@ -5,19 +5,20 @@ import { useMutation, useQuery } from 'react-query'
 import { Context } from './Contexts/ContextProvider';
 
 function Header() {
+    const {searching, search, setSearch} = useContext(Context)
+    //use history 
     const history = useHistory();
-
-    const [search , setSearch] = useState('');
+    
     const [emptyStyle, setEmptyStyle] = useState({});
-
-    //api for searching 
-    const searching = useQuery(['searching', search], ()=> api.searching(search));
+    
     //search handler 
     const searchChanges = (e) => {
         setSearch(e.target.value);
     }
     const searchHandler = () =>{
-        if(search !== ''){
+        if(search === '%' || search === '#' || search === '&' || search === '?' || search === '/'){
+            alert('dont use from this charecter: '+search)
+        }else if(search !== ''){
             history.push(`/Search/${search}`)
         }else{
             setEmptyStyle({border: '1px solid red', borderRight: 'none', borderLeft: 'none'})

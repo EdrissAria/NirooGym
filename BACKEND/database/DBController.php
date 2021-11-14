@@ -1,5 +1,4 @@
 <?php
-
 class DBController{
     protected $host = "localhost";
     protected $user = "root";
@@ -26,22 +25,4 @@ class DBController{
             
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

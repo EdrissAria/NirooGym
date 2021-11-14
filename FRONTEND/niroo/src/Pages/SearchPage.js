@@ -7,13 +7,12 @@ import * as api from '../components/Api'
 import { useMutation, useQuery } from 'react-query'
 import ParkList from '../components/Lists/ParkList'
 import Title from '../components/Title'
+import { Context } from '../components/Contexts/ContextProvider';
 
 
 function SearchPage() {
-    const { search } = useParams();
-
-    const searching = useQuery(['search', search], () => api.searching(search));
-    console.log(searching.data)
+    const {searching, search} = useContext(Context)
+    
     if (searching.isSuccess) {
         if (searching.data.length < 1) {
             return <h2 style={{ textAlign: 'center', marginTop: '30px' }}>No Result</h2>
@@ -41,8 +40,8 @@ function SearchPage() {
                             </thead>
                             <tbody>
                                 {
-                                    searching.data.map((srch, index, arr) => (
-
+                                    searching.data.map((srch, index) => (
+                                        
                                         srch.agr_id == null ?
                                             <tr key={srch.reg_id}>
                                                 <td>{++index}</td>

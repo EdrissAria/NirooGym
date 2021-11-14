@@ -1,11 +1,14 @@
 import { createContext, useState } from "react";
 import * as api from '../Api'
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
+import { useHistory } from "react-router-dom";
 
 export const Context = createContext();
  
 const ContextProvider = (props)=>{
-    
+    const [search , setSearch] = useState('');
+    //api for searching 
+    const searching = useQuery(['searching', search], ()=> api.searching(search));
     //for getting earning type
     const [earn, setearn] = useState('');
     const selectEarning = (earning)=>{
@@ -15,7 +18,10 @@ const ContextProvider = (props)=>{
     // value pass into context 
     const value = {
         earn, 
-        selectEarning, 
+        selectEarning,
+        search,
+        setSearch,
+        searching
     }
     return (
         <Context.Provider value={value}>
