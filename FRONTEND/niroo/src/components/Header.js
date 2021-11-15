@@ -10,18 +10,25 @@ function Header() {
     const history = useHistory();
     
     const [emptyStyle, setEmptyStyle] = useState({});
+    const [em, setem] = useState(false);
+    const [validCharacter, setValidCharacter] = useState(false)
     
     //search handler 
     const searchChanges = (e) => {
         setSearch(e.target.value);
+        setem(false)
+        setValidCharacter(false)
     }
     const searchHandler = () =>{
-        if(search === '%' || search === '#' || search === '&' || search === '?' || search === '/'){
-            alert('dont use from this charecter: '+search)
+        if(search.match(/%/gi) || search.match(/[?]/gi) || search.match(/#/gi) || search.match(/&/gi) || search.match(/[/]/gi)){
+            setValidCharacter(true)
         }else if(search !== ''){
             history.push(`/Search/${search}`)
+            setem(false)
+            setValidCharacter(false)
         }else{
             setEmptyStyle({border: '1px solid red', borderRight: 'none', borderLeft: 'none'})
+            setem(true);
         } 
     }
     return (
@@ -56,6 +63,10 @@ function Header() {
                                 <input type="text" name="search" onFocus={()=> setEmptyStyle({})} onChange={searchChanges} placeholder="search here.." style={emptyStyle} className="search" />
                                 <button onClick={searchHandler}  className="btn-search" style={emptyStyle}><img src={'/assets/img/search.png'} /></button>
                             </li>
+                            {
+                                em ?<div style={{position: 'absolute',top: 43, padding: '0 20px', color: 'red', transition: '0.5s'}}>write something to search</div>:
+                                validCharacter ? <div style={{position: 'absolute',top: 43, padding: '0 20px', color: 'red', transition: '0.5s'}}>%,#,&,/ are not valid!</div>:''
+                            }
                         </ul>
                     </div>
                 </div>

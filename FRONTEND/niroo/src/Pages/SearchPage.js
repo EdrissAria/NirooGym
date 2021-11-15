@@ -14,6 +14,7 @@ function SearchPage() {
     const {searching, search} = useContext(Context)
     
     if (searching.isSuccess) {
+    
         if (searching.data.length < 1) {
             return <h2 style={{ textAlign: 'center', marginTop: '30px' }}>No Result</h2>
         }
@@ -41,35 +42,34 @@ function SearchPage() {
                             <tbody>
                                 {
                                     searching.data.map((srch, index) => (
-                                        
                                         srch.agr_id == null ?
-                                            <tr key={srch.reg_id}>
-                                                <td>{++index}</td>
-                                                <td>{srch.name.includes(search) ? <span style={{ background: 'yellow' }}>{srch.name}</span> : srch.name}</td>
-                                                <td>{srch.phone.includes(search) ? <span style={{ background: 'yellow' }}>{srch.phone}</span> : srch.phone}</td>
-                                                <td>{srch.amount.includes(search) ? <span style={{ background: 'yellow' }}>{srch.amount}</span> : srch.amount}</td>
-                                                <td>{srch.recived.includes(search) ? <span style={{ background: 'yellow' }}>{srch.recived}</span> : srch.recived}</td>
-                                                <td>{srch.entry_date.includes(search) ? <span style={{ background: 'yellow' }}>{srch.entry_date}</span> : srch.entry_date}</td>
-                                                <td>{srch.play_date.includes(search) ? <span style={{ background: 'yellow' }}>{srch.play_date}</span> : srch.play_date}</td>
-                                                <td>{srch.time.includes(search) ? <span style={{ background: 'yellow' }}>{srch.time}</span> : srch.time}</td>
-                                                <td>{srch.wrote_by.includes(search) ? <span style={{ background: 'yellow' }}>{srch.wrote_by}</span> : srch.wrote_by}</td>
-                                                <td>{srch.status.includes(search) ? <span style={{ background: 'yellow' }}>{srch.status}</span> : srch.status}</td>
-                                                <td>Regular time</td>
-                                            </tr>
-                                            :
-                                            <tr key={srch.reg_id}>
-                                                <td>{++index}</td>
-                                                <td>{srch.name.includes(search) ? <span style={{ background: 'yellow' }}>{srch.name}</span> : srch.name}</td>
-                                                <td>{srch.phone.includes(search) ? <span style={{ background: 'yellow' }}>{srch.phone}</span> : srch.phone}</td>
-                                                <td>{srch.amount.includes(search) ? <span style={{ background: 'yellow' }}>{srch.amount}</span> : srch.amount}</td>
-                                                <td>{srch.recived.includes(search) ? <span style={{ background: 'yellow' }}>{srch.recived}</span> : srch.recived}</td>
-                                                <td>{srch.entry_date.includes(search) ? <span style={{ background: 'yellow' }}>{srch.entry_date}</span> : srch.entry_date}</td>
-                                                <td>{srch.play_date.includes(search) ? <span style={{ background: 'yellow' }}>{srch.play_date}</span> : srch.play_date}</td>
-                                                <td>{srch.time.includes(search) ? <span style={{ background: 'yellow' }}>{srch.time}</span> : srch.time}</td>
-                                                <td>{srch.wrote_by.includes(search) ? <span style={{ background: 'yellow' }}>{srch.wrote_by}</span> : srch.wrote_by}</td>
-                                                <td>{srch.status.includes(search) ? <span style={{ background: 'yellow' }}>{srch.status}</span> : srch.status}</td>
-                                                <td><Link to={`/ViewEarnings/agreement_time/${srch.agr_id}`} className="btn btn-info btn-sm">agreement time</Link></td>
-                                            </tr>
+                                        <tr key={srch.reg_id}>
+                                            <td>{++index}</td>
+                                            <td>{srch.name.toLowerCase().includes(search.toLowerCase()) ? <span style={{ background: 'yellow' }}>{srch.name}</span> : srch.name}</td>
+                                            <td>{srch.phone.toLowerCase().includes(search.toLowerCase()) ? <span style={{ background: 'yellow' }}>{srch.phone}</span> : srch.phone}</td>
+                                            <td>{srch.amount.toLowerCase().includes(search.toLowerCase()) ? <span style={{ background: 'yellow' }}>{srch.amount}</span> : srch.amount}</td>
+                                            <td>{srch.recived.toLowerCase().includes(search.toLowerCase()) ? <span style={{ background: 'yellow' }}>{srch.recived}</span> : srch.recived}</td>
+                                            <td>{srch.entry_date.toLowerCase().includes(search.toLowerCase()) ? <span style={{ background: 'yellow' }}>{srch.entry_date}</span> : srch.entry_date}</td>
+                                            <td>{srch.play_date.toLowerCase().includes(search.toLowerCase()) ? <span style={{ background: 'yellow' }}>{srch.play_date}</span> : srch.play_date}</td>
+                                            <td>{srch.time.toLowerCase().includes(search.toLowerCase()) ? <span style={{ background: 'yellow' }}>{srch.time}</span> : srch.time}</td>
+                                            <td>{srch.wrote_by.toLowerCase().includes(search.toLowerCase()) ? <span style={{ background: 'yellow' }}>{srch.wrote_by}</span> : srch.wrote_by}</td>
+                                            <td>{srch.status.toLowerCase().includes(search.toLowerCase()) ? <span style={{ background: 'yellow' }}>{srch.status}</span> : srch.status}</td>
+                                            <td>Regular time</td>
+                                        </tr>
+                                        :
+                                        <tr key={srch.reg_id}>
+                                            <td>{++index}</td>
+                                            <td>{srch.name.toLowerCase().includes(search.toLowerCase()) ? <span style={{ background: 'yellow' }}>{srch.name}</span> : srch.name}</td>
+                                            <td>{srch.phone.toLowerCase().includes(search.toLowerCase()) ? <span style={{ background: 'yellow' }}>{srch.phone}</span> : srch.phone}</td>
+                                            <td>{srch.amount.toLowerCase().includes(search.toLowerCase()) ? <span style={{ background: 'yellow' }}>{srch.amount}</span> : srch.amount}</td>
+                                            <td>{srch.recived.toLowerCase().includes(search.toLowerCase()) ? <span style={{ background: 'yellow' }}>{srch.recived}</span> : srch.recived}</td>
+                                            <td>{srch.entry_date.toLowerCase().includes(search.toLowerCase()) ? <span style={{ background: 'yellow' }}>{srch.entry_date}</span> : srch.entry_date}</td>
+                                            <td>{srch.play_date.toLowerCase().includes(search.toLowerCase()) ? <span style={{ background: 'yellow' }}>{srch.play_date}</span> : srch.play_date}</td>
+                                            <td>{srch.time.toLowerCase().includes(search.toLowerCase()) ? <span style={{ background: 'yellow' }}>{srch.time}</span> : srch.time}</td>
+                                            <td>{srch.wrote_by.toLowerCase().includes(search.toLowerCase()) ? <span style={{ background: 'yellow' }}>{srch.wrote_by}</span> : srch.wrote_by}</td>
+                                            <td>{srch.status.toLowerCase().includes(search.toLowerCase()) ? <span style={{ background: 'yellow' }}>{srch.status}</span> : srch.status}</td>
+                                            <td><Link to={`/ViewEarnings/agreement_time/${srch.agr_id}`} className="btn btn-info btn-sm">agreement time</Link></td>
+                                        </tr>
                                     ))
                                 }
                             </tbody>
