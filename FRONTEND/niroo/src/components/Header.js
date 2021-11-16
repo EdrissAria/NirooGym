@@ -20,7 +20,7 @@ function Header() {
         setValidCharacter(false)
     }
     const searchHandler = () =>{
-        if(search.match(/%/gi) || search.match(/[?]/gi) || search.match(/#/gi) || search.match(/&/gi) || search.match(/[/]/gi)){
+        if(search.match(/(\#|\%|\&|\?)/g)){
             setValidCharacter(true)
         }else if(search !== ''){
             history.push(`/Search/${search}`)

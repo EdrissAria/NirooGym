@@ -21,6 +21,7 @@ import UpdateAgr from './Pages/UpdateAgr'
 import ViewEarningsPage from './Pages/ViewEarningsPage'
 import Loans from './Pages/Loans'
 import Bank from './Pages/Bank'
+import Login from './Pages/Login'
 import SearchPage from './Pages/SearchPage'
  
 
@@ -28,32 +29,33 @@ import SearchPage from './Pages/SearchPage'
 function App() {
      
     return (
-        <Router>
-            <Header />
-            <Aside />
-            <Switch>
-                <Route exact path="/" component={Dashboard} />
-                <Route path="/recordTime" component={RecordTime} />
-                <Route path="/registerdTime" component={RegisterdTime} />
-                <Route path="/agreementTime" component={AgreementTime} />
-                <Route path="/paidTimes" component={PaidTimes} />
-                <Route path="/expences" component={Expences} />
-                <Route path="/earnings" component={Earnings} />
-                <Route path="/cache_book" component={CacheBook} />
-                <Route path="/staff" component={Staff} />
-                <Route path="/users" component={Users} />
-                <Route path="/parking" component={Parking} />
-                <Route path="/loans" component={Loans} />
-                <Route path="/bank" component={Bank} />
-                <Route path="/Search/:search" component={SearchPage} />
-                <Route path="/ViewEarnings/:earn/:id" component={ViewEarningsPage} />
-                <Route path="/userUpdate/:id" component={UserUpdate} />
-                <Route path="/staffUpdate/:id" component={StaffUpdate} />
-                <Route path="/regEdit/:id" component={RegEdit} />
-                <Route path="/viewAgreementTime/:id" component={SingleAgrTime}/>
-                <Route path="/updateAgreementTime/:id" component={UpdateAgr} />
-            </Switch>
-        </Router>
+        <Login />
+        // <Router>
+        //     <Header />
+        //     <Aside />
+        //     <Switch>
+        //         <Route exact path="/" component={Dashboard} />
+        //         <Route path="/recordTime" component={RecordTime} />
+        //         <Route path="/registerdTime" component={RegisterdTime} />
+        //         <Route path="/agreementTime" component={AgreementTime} />
+        //         <Route path="/paidTimes" component={PaidTimes} />
+        //         <Route path="/expences" component={Expences} />
+        //         <Route path="/earnings" component={Earnings} />
+        //         <Route path="/cache_book" component={CacheBook} />
+        //         <Route path="/staff" component={Staff} />
+        //         <Route path="/users" component={Users} />
+        //         <Route path="/parking" component={Parking} />
+        //         <Route path="/loans" component={Loans} />
+        //         <Route path="/bank" component={Bank} />
+        //         <Route path="/Search/:search" component={SearchPage} />
+        //         <Route path="/ViewEarnings/:earn/:id" component={ViewEarningsPage} />
+        //         <Route path="/userUpdate/:id" component={UserUpdate} />
+        //         <Route path="/staffUpdate/:id" component={StaffUpdate} />
+        //         <Route path="/regEdit/:id" component={RegEdit} />
+        //         <Route path="/viewAgreementTime/:id" component={SingleAgrTime}/>
+        //         <Route path="/updateAgreementTime/:id" component={UpdateAgr} />
+        //     </Switch>
+        // </Router>
     )
 }
 
