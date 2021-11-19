@@ -1,15 +1,18 @@
 /* Dashboard Query */
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 ul {
     list-style: none;
 }
+
 .container {
     padding: 0 !important;
 }
+
 .active {
     color: rgb(5, 170, 87);
 }
@@ -498,25 +501,47 @@ td.ck input[type="checkbox"]:checked:before {
 }
 
 /*____________________________ Login page style _______________________________________ */
-.login_container{
-    max-height: 767px;
-}
 .login_card {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 26rem;
-    height: 24rem;
+    width: 60rem;
+    height: 26rem;
     padding: 20px;
     background-color: transparent;
     border-radius: 5px;
     border: 1px solid #ccc;
 }
 
+.image_container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.image_container img {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
 .login_form {
     display: flex;
+    justify-content: center;
     flex-direction: column;
+    padding: 1rem;
+}
+
+.input_group {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.input_group img {
+    width: 1.8rem;
+    margin-right: 10px;
+    vertical-align: bottom;
 }
 
 .login_header {
@@ -534,49 +559,64 @@ td.ck input[type="checkbox"]:checked:before {
     color: rgb(245, 245, 245);
     text-shadow: 3px 3px 4px violet;
 }
-
-.login_form label {
-    display: inline-block;
-    margin-top: 0.7rem;
-    margin-bottom: 0.5rem;
-    font-size: 22px;
-    font-family: inherit;
-    color: #555;
-    text-shadow: 1px 1px 6px #ddd;
-}
-
 .login_input {
+    width: 22rem;
     font-size: 18px;
     font-family: sans-serif;
     color: #555;
     padding: 7px 10px;
-    border: 1px solid #ccc;
+    border: none;
+    border-bottom: 2px solid #ccc;
     border-radius: 2px;
     outline: none;
+    margin-top: 1rem;
     transition: 0.5s;
 }
 
 .login_input:focus {
-    background-image: linear-gradient(45deg, rgb(241, 225, 241), rgb(255, 255, 255));
+    background-color: rgb(246, 246, 246);
+    border-bottom: 2px solid rgb(104, 104, 104);
 }
 
 .login_input::placeholder {
-    color: rgb(195, 195, 195);
+    color: rgb(184, 184, 184);
 }
 
 .login_submit {
+    width: 8rem;
     font-size: 22px;
     font-family: system-ui;
     font-weight: 600;
     letter-spacing: 1px;
     color: rgb(253, 253, 253);
     padding: 6px 20px;
-    margin-top: 1.2rem;
-    border: none;
+    margin-top: 1.7rem;
+    border: 1px solid rgb(255, 255, 255);
     background-image: linear-gradient(45deg, rgb(74, 185, 102), rgb(196, 246, 203));
-    border-radius: 3px;
+    border-radius: 2.4rem;
     transition: 1s;
     outline: none !important;
-    cursor: pointer;   
+    cursor: pointer;
+    vertical-align: middle;
+    align-self: center;
+    
 }
- 
+.login_submit:hover{
+    border: 1px solid rgb(30, 141, 86);
+    color: rgb(255, 255, 255);
+}
+.login_left{
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+.circle{
+    position: absolute;
+    top: -24rem;
+    left: -24rem;
+    width: 71rem;
+    height: 71rem;
+    border-radius: 50%;
+    background-image: linear-gradient(45deg, rgb(253, 255, 143), rgb(251, 255, 0));
+    z-index: -1;
+}
