@@ -14,14 +14,19 @@ const ContextProvider = (props)=>{
     const selectEarning = (earning)=>{
         setearn(earning);
     }
-
+    //context api for login and logout
+    const [loginData, setLoginData] = useState({username:'', password:''});
+    const login = useMutation(api.LoginHandler);
     // value pass into context 
     const value = {
         earn, 
         selectEarning,
         search,
         setSearch,
-        searching
+        searching, 
+        loginData, 
+        setLoginData, 
+        login
     }
     return (
         <Context.Provider value={value}>

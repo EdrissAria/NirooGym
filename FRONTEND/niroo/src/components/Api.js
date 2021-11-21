@@ -29,7 +29,11 @@ export const getData = () => api.get('/getData.php').then(res => res.data);
 
 
 //actions delete, update ...
-
+//login page 
+export const LoginHandler = async(loginData)=>{
+    const response = await api.post('/loginHandler.php', loginData);
+    console.log(response.data);
+}
 //delete user
 export const deleteUser = async (id) => {
     const response = await api.get(`/deleteUser.php?id=${id}`)
