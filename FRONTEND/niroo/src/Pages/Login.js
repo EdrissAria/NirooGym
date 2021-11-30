@@ -3,6 +3,7 @@ import {Context} from '../components/Contexts/ContextProvider'
 
 function Login() {
     const {loginData, setLoginData, login} = useContext(Context);
+    
     const changeHandler = (e)=>{
         setLoginData({...loginData, [e.target.name]: e.target.value})
     }

@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+// include jwt 
+require 'api/vendor/autoload.php';
+use \Firebase\JWT\JWT;
 
 class Functions
 {
@@ -945,16 +949,72 @@ class Functions
         }
     }
     public function loginHandler($username, $password, $table = 'users'){
-        if($username && $password){
+        if(!empty($username) && !empty($password)){
             $check = $this->db->con->query("SELECT * FROM {$table} WHERE username = '$username' AND password = '$password'");
-            $row = mysqli_num_rows($check);
-            if($row > 0){
-                echo '{"status":"success", "token": "dlkajdflajldkahfoihaeoihfi eec auiwhfeiqu4uy938479384urcuyfhyu 3f3hif"}';
+            
+            if(mysqli_num_rows($check) > 0){
+                $row = mysqli_fetch_assoc($check);
+                $user_id = $row['user_id'];
+                $username = $row['username'];
+                $position = $row['position'];
+                $photo = $row['photo'];
+              
+
+                $iss = 'localhost';
+                $iat = time();
+                $nbf = $iat + 10;
+                $exp = $iat + 180;
+                $aud = 'myusers';
+                $user_arr_data = array(
+                    "id"=> $user_id,
+                    "username"=> $username,
+                    "position"=> $position,
+                    "photo" => $photo,
+                );
+
+                $payload_info = array(
+                    "iss"=> $iss,
+                    "iat"=> $iat,
+                    "nbf"=> $nbf,
+                    "exp"=> $exp,
+                    "aud"=> $aud,
+                    "data"=> $user_arr_data
+                );
+                $secret_key = 'eeedrisss123';
+
+                $token = JWT::encode($payload_info, $secret_key, 'HS256');
+
+                http_response_code(200);
+                echo json_encode(array(
+                    "status" => 1,
+                    "token" => $token,
+                    "data" => $user_arr_data,
+                    "message" => 'You login successfully!'
+                ));
             }else{
-                throw new Error('Incorrect username or password');
+                echo json_encode(array(
+                    "status" => 0,
+                    "message" => 'invalid username or password'
+                ));
             }
         }else{
-            echo 'all field are required';
+            echo json_encode(array(
+                "status" => 0,
+                "message" => "all fields are needed"
+            ));
         }
+    }
+    public function auth($token){
+        if(!empty($token)){
+            $secret_key = 'eeedrisss123';
+            $decode_data = JWT::decode($token, $secret_key, array('HS256'));
+            
+            print_r($decode_data);
+        }else{
+            echo json_encode(array(
+                "status"=> 0,
+                "message"=> "something went wrong"
+            ));
+        }     
     }
 }

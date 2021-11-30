@@ -32,7 +32,15 @@ export const getData = () => api.get('/getData.php').then(res => res.data);
 //login page 
 export const LoginHandler = async(loginData)=>{
     const response = await api.post('/loginHandler.php', loginData);
-    console.log(response.token)
+    localStorage.setItem('token', response.data.token)
+}
+export const auth = async()=>{
+    const response = await api.get('/auth.php', {
+        headers:{
+            Authorization: localStorage.getItem('token')
+        }
+    });
+    console.log(response.data)
 }
 //delete user
 export const deleteUser = async (id) => {

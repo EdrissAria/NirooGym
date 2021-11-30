@@ -1,4 +1,5 @@
 import React from 'react'
+import * as api from './components/Api'
 import Header from './components/Header'
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import RecordTime from './Pages/RecordTime'
@@ -23,11 +24,12 @@ import Loans from './Pages/Loans'
 import Bank from './Pages/Bank'
 import Login from './Pages/Login'
 import SearchPage from './Pages/SearchPage'
+import { useQuery } from 'react-query'
  
 
 
 function App() {
-     
+    const auth = useQuery(['getauth'], api.auth)
     return (
         <Login />
         // <Router>
