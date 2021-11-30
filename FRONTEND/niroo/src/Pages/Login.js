@@ -4,13 +4,14 @@ import {Context} from '../components/Contexts/ContextProvider'
 function Login() {
     const {loginData, setLoginData, login} = useContext(Context);
     const changeHandler = (e)=>{
-        setLoginData({[e.target.name]: e.target.value})
+        setLoginData({...loginData, [e.target.name]: e.target.value})
     }
     const loginHandler = (e)=>{
         e.preventDefault();
-        // login.mutate(loginData);
-        console.log(loginData)
+        login.mutate(loginData);
     }
+     
+   
     return (
         <div className="login_container">
             <div className="login_card">

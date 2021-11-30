@@ -944,4 +944,17 @@ class Functions
             return json_encode($searchArray);
         }
     }
+    public function loginHandler($username, $password, $table = 'users'){
+        if($username && $password){
+            $check = $this->db->con->query("SELECT * FROM {$table} WHERE username = '$username' AND password = '$password'");
+            $row = mysqli_num_rows($check);
+            if($row > 0){
+                echo '{"status":"success", "token": "dlkajdflajldkahfoihaeoihfi eec auiwhfeiqu4uy938479384urcuyfhyu 3f3hif"}';
+            }else{
+                throw new Error('Incorrect username or password');
+            }
+        }else{
+            echo 'all field are required';
+        }
+    }
 }

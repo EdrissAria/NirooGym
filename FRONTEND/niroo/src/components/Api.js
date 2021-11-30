@@ -32,7 +32,7 @@ export const getData = () => api.get('/getData.php').then(res => res.data);
 //login page 
 export const LoginHandler = async(loginData)=>{
     const response = await api.post('/loginHandler.php', loginData);
-    console.log(response.data);
+    console.log(response.token)
 }
 //delete user
 export const deleteUser = async (id) => {

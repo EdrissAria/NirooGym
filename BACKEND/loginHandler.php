@@ -7,9 +7,8 @@ require('objects.php');
 
 
 $data = json_decode(file_get_contents('php://input'), true);
-
-print_r($data);
-// $password = sha1($data['password']);
-// $username = $data['username'];
  
-// $func->insertUser($username, $password, $position, $photo, 'myself', $date);
+$password = sha1($data['password']);
+$username = $data['username'];
+ 
+$func->loginHandler($username, $password);
