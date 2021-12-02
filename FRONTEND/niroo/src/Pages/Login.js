@@ -11,8 +11,6 @@ function Login() {
         e.preventDefault();
         login.mutate(loginData);
     }
-     
-   
     return (
         <div className="login_container">
             <div className="login_card">

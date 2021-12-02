@@ -17,6 +17,8 @@ const ContextProvider = (props)=>{
     //context api for login and logout
     const [loginData, setLoginData] = useState({username:'', password:''});
     const login = useMutation(api.LoginHandler);
+    //auth context 
+    const auth = useQuery(['getauth'], api.auth); 
     // value pass into context 
     const value = {
         earn, 
@@ -26,7 +28,8 @@ const ContextProvider = (props)=>{
         searching, 
         loginData, 
         setLoginData, 
-        login
+        login, 
+        auth
     }
     return (
         <Context.Provider value={value}>

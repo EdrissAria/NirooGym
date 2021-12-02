@@ -11,8 +11,6 @@ function Dashboard() {
     const getData = useQuery('data', api.getData);
 
     if (dashboard.isSuccess && getData.isSuccess) {
-        console.log(getData.data);
-        console.log(dashboard.data);
         return (
             <div className="graph_area">
                 <div className="container">

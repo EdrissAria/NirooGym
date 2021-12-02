@@ -31,16 +31,33 @@ export const getData = () => api.get('/getData.php').then(res => res.data);
 //actions delete, update ...
 //login page 
 export const LoginHandler = async(loginData)=>{
-    const response = await api.post('/loginHandler.php', loginData);
-    localStorage.setItem('token', response.data.token)
+    try{
+        const response = await api.post('/loginHandler.php', loginData);
+        if(response.status == 200 && response.data.token && response.data.expireAt){
+            let token = response.data.token; 
+            let expire_at = response.data.expireAt; 
+            
+            localStorage.setItem('access_token', token); 
+            localStorage.setItem('expire_time', expire_at); 
+        }
+    }catch(e){
+        console.log(e)
+    }
+    
 }
 export const auth = async()=>{
-    const response = await api.get('/auth.php', {
+    try{
+        const response = await api.get('/auth.php', {
         headers:{
-            Authorization: localStorage.getItem('token')
+            Authorization: 'Bearer ' + localStorage.getItem('access_token')
         }
-    });
-    console.log(response.data)
+        }) 
+        if(response.status == 200 && response.data.user){
+            return response.data.user;
+        }
+    }catch(e){
+        console.log(e)
+    }
 }
 //delete user
 export const deleteUser = async (id) => {

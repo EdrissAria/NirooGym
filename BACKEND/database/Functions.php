@@ -963,7 +963,7 @@ class Functions
                 $iss = 'localhost';
                 $iat = time();
                 $nbf = $iat + 10;
-                $exp = $iat + 180;
+                $exp = $iat + (60 * 60);
                 $aud = 'myusers';
                 $user_arr_data = array(
                     "id"=> $user_id,
@@ -982,12 +982,13 @@ class Functions
                 );
                 $secret_key = 'eeedrisss123';
 
-                $token = JWT::encode($payload_info, $secret_key, 'HS256');
+                $token = JWT::encode($payload_info, $secret_key, 'HS384');
 
                 http_response_code(200);
                 echo json_encode(array(
                     "status" => 1,
                     "token" => $token,
+                    "expireAt" => $exp,
                     "data" => $user_arr_data,
                     "message" => 'You login successfully!'
                 ));
@@ -1005,15 +1006,45 @@ class Functions
         }
     }
     public function auth($token){
-        if(!empty($token)){
-            $secret_key = 'eeedrisss123';
-            $decode_data = JWT::decode($token, $secret_key, array('HS256'));
-            
-            print_r($decode_data);
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            if(!empty($token)){
+                $jwt = str_replace('Bearer ', '', $token);
+                try{
+                    $secret_key = 'eeedrisss123';
+                    $decode_data = JWT::decode($jwt, $secret_key, array('HS384'));
+                    $data = $decode_data->data;
+                    if($data){
+                        http_response_code(200);
+                        echo json_encode(array(
+                            "status" =>  1,
+                            "user" => $data, 
+                            "message" => 'success'
+                        ));
+                    }else{
+                        echo json_encode(array(
+                            "status" =>  0,
+                            "message" => 'unauthorized'
+                        ));
+                    }
+                }catch(Exception $e){
+                    http_response_code(404); 
+                    echo json_encode(array(
+                        "status" =>  0,
+                        "message" => $e->getMessage()
+                    ));
+                }
+                
+            }else{
+                http_response_code(404); 
+                echo json_encode(array(
+                    "status"=> 0,
+                    "message"=> "something went wrong"
+                ));
+            }     
         }else{
             echo json_encode(array(
                 "status"=> 0,
-                "message"=> "something went wrong"
+                "message"=> "this method is not supported"
             ));
         }     
     }

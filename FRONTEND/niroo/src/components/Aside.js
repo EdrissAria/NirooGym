@@ -1,7 +1,11 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 
 function Aside() {
+    const logout = () => {
+        localStorage.removeItem('access_token'); 
+        localStorage.removeItem('expire_time');
+    }
     return (
         <aside className="sidebar">
             <img src={'/assets/img/logo.png'} />
@@ -11,7 +15,7 @@ function Aside() {
                 <li><Link to="/staff" title="Staff"><img src="/assets/img/stuff.png"/></Link></li>
                 <li><Link to="/loans" title="Loans"><img src="/assets/img/loan.png"/></Link></li>
                 <li><Link to="/parking" title="Parking"><img src="/assets/img/parking.png"/></Link></li>
-                <li><Link to="/logout" title="Log out"><img src="/assets/img/exit.png"/></Link></li>
+                <li><button onClick={logout} className="logout_btn"><img src="/assets/img/exit.png"/></button></li>
             </ul>
             <ul className="bottom_sidebar_icon">
                 <li><Link to="/cache_book" title="Cache Book"><img src={'/assets/img/cache_book.png'}/></Link></li>
