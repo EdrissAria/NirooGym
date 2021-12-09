@@ -1,11 +1,11 @@
 import React from 'react'
 import {Link, Redirect} from 'react-router-dom'
+import { useContext } from 'react/cjs/react.development'
+import { Context } from '../components/Contexts/ContextProvider'
 
 function Aside() {
-    const logout = () => {
-        localStorage.removeItem('access_token'); 
-        localStorage.removeItem('expire_time');
-    }
+    const {logout} = useContext(Context);
+
     return (
         <aside className="sidebar">
             <img src={'/assets/img/logo.png'} />

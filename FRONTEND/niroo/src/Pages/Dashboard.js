@@ -1,20 +1,23 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { Link } from 'react-router-dom'
 import { Pie } from 'react-chartjs-2'
 import { Bar } from 'react-chartjs-2'
 import Title from '../components/Title'
 import * as api from '../components/Api'
 import { useQuery } from 'react-query'
+import {Context} from '../components/Contexts/ContextProvider'
+
 
 function Dashboard() {
     const dashboard = useQuery('dashboard', api.getInfo);
     const getData = useQuery('data', api.getData);
+    const {userData} = useContext(Context); 
 
     if (dashboard.isSuccess && getData.isSuccess) {
         return (
             <div className="graph_area">
                 <div className="container">
-                    <Title linkTo="/recordTime" title="Welcome" subTitle="M.Edriss Aria" buttonValue="Record a new time" />
+                    <Title linkTo="/recordTime" title="Welcome" subTitle="name" buttonValue="Record a new time" />
                     <div className="value_cards_sec">
                         <div className="row">
                             <div className="col col-lg-4">

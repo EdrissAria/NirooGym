@@ -29,51 +29,45 @@ import { Context } from './components/Contexts/ContextProvider'
 
 
 function App() {
+    const { userData } = useContext(Context)
 
-    const { auth } = useContext(Context);
     
-    if (window.location.pathname == '/login') {
+    if(window.location.pathname == '/login'){
         return (
-            <>
-                <Switch>
-                    <Route path="/login" component={Login} />
-                </Switch>
-            </>
+            <Switch>
+                <Route exact path="/login" component={Login} />
+            </Switch>
         )
-    } else {
-        if(!auth.data){
-            return <Redirect to={'/login'} />
-        }else{
-        return (
-            <>
-                <Header />
-                <Aside />
-                <Switch>
-                    <Route exact path="/" component={Dashboard} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/recordTime" component={RecordTime} />
-                    <Route path="/registerdTime" component={RegisterdTime} />
-                    <Route path="/agreementTime" component={AgreementTime} />
-                    <Route path="/paidTimes" component={PaidTimes} />
-                    <Route path="/expences" component={Expences} />
-                    <Route path="/earnings" component={Earnings} />
-                    <Route path="/cache_book" component={CacheBook} />
-                    <Route path="/staff" component={Staff} />
-                    <Route path="/users" component={Users} />
-                    <Route path="/parking" component={Parking} />
-                    <Route path="/loans" component={Loans} />
-                    <Route path="/bank" component={Bank} />
-                    <Route path="/Search/:search" component={SearchPage} />
-                    <Route path="/ViewEarnings/:earn/:id" component={ViewEarningsPage} />
-                    <Route path="/userUpdate/:id" component={UserUpdate} />
-                    <Route path="/staffUpdate/:id" component={StaffUpdate} />
-                    <Route path="/regEdit/:id" component={RegEdit} />
-                    <Route path="/viewAgreementTime/:id" component={SingleAgrTime} />
-                    <Route path="/updateAgreementTime/:id" component={UpdateAgr} />
-                </Switch>
-            </>
-        )}
     }
+    return (
+        <>
+            <Header />
+            <Aside />
+            <Switch>
+                <Route exact path="/" component={Dashboard} />
+                <Route path="/login" component={Login} />
+                <Route path="/recordTime" component={RecordTime} />
+                <Route path="/registerdTime" component={RegisterdTime} />
+                <Route path="/agreementTime" component={AgreementTime} />
+                <Route path="/paidTimes" component={PaidTimes} />
+                <Route path="/expences" component={Expences} />
+                <Route path="/earnings" component={Earnings} />
+                <Route path="/cache_book" component={CacheBook} />
+                <Route path="/staff" component={Staff} />
+                <Route path="/users" component={Users} />
+                <Route path="/parking" component={Parking} />
+                <Route path="/loans" component={Loans} />
+                <Route path="/bank" component={Bank} />
+                <Route path="/Search/:search" component={SearchPage} />
+                <Route path="/ViewEarnings/:earn/:id" component={ViewEarningsPage} />
+                <Route path="/userUpdate/:id" component={UserUpdate} />
+                <Route path="/staffUpdate/:id" component={StaffUpdate} />
+                <Route path="/regEdit/:id" component={RegEdit} />
+                <Route path="/viewAgreementTime/:id" component={SingleAgrTime} />
+                <Route path="/updateAgreementTime/:id" component={UpdateAgr} />
+            </Switch>
+        </>
+    )
 }
 
 export default App

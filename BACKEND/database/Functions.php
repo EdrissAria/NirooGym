@@ -993,6 +993,7 @@ class Functions
                     "message" => 'You login successfully!'
                 ));
             }else{
+                http_response_code(404); 
                 echo json_encode(array(
                     "status" => 0,
                     "message" => 'invalid username or password'
@@ -1027,7 +1028,6 @@ class Functions
                         ));
                     }
                 }catch(Exception $e){
-                    http_response_code(404); 
                     echo json_encode(array(
                         "status" =>  0,
                         "message" => $e->getMessage()
@@ -1035,7 +1035,6 @@ class Functions
                 }
                 
             }else{
-                http_response_code(404); 
                 echo json_encode(array(
                     "status"=> 0,
                     "message"=> "something went wrong"

@@ -1,35 +1,48 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import * as api from '../Api'
 import { useMutation, useQuery } from "react-query";
-import { useHistory } from "react-router-dom";
+import axios from "axios";
+import { Redirect } from "react-router";
 
 export const Context = createContext();
- 
-const ContextProvider = (props)=>{
-    const [search , setSearch] = useState('');
+
+const ContextProvider = (props) => {
+    const [search, setSearch] = useState('');
+    const [userData, setUserData] = useState({});
+
     //api for searching 
-    const searching = useQuery(['searching', search], ()=> api.searching(search));
+    const searching = useQuery(['searching', search], () => api.searching(search));
     //for getting earning type
     const [earn, setearn] = useState('');
-    const selectEarning = (earning)=>{
+    const selectEarning = (earning) => {
         setearn(earning);
     }
-    //context api for login and logout
-    const [loginData, setLoginData] = useState({username:'', password:''});
-    const login = useMutation(api.LoginHandler);
+    
+    //logout
+    const logout = () => {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('expire_time');
+        setUserData({});
+        window.location.replace('/login')
+    }
     //auth context 
-    const auth = useQuery(['getauth'], api.auth); 
+    const auth = useQuery(['auth'], api.Auth);
+
+    const authorization = () => {
+        if(auth.isSuccess){
+            setUserData(auth.data.user)
+        }
+    }
     // value pass into context 
     const value = {
-        earn, 
+        earn,
         selectEarning,
         search,
         setSearch,
-        searching, 
-        loginData, 
-        setLoginData, 
-        login, 
-        auth
+        searching,
+        logout,
+        userData,
+        setUserData
     }
     return (
         <Context.Provider value={value}>
