@@ -2,6 +2,7 @@
 ini_set('display_errors', 1);
 // include jwt 
 require 'api/vendor/autoload.php';
+
 use \Firebase\JWT\JWT;
 
 class Functions
@@ -153,7 +154,7 @@ class Functions
                 VALUES ({$row['park_id']},'$table', {$amount}, 'finish', 'M.Edriss', '$date');";
                 $insertEarn = $this->db->con->query($query);
                 if ($insertEarn) {
-                    $this->addBank($date);
+                    $this->addBank($date, 'earn');
                     echo 'success earn';
                 } else {
                     echo 'failed earn';
@@ -177,7 +178,7 @@ class Functions
                 $query = "INSERT INTO {$table} (user_id, amount, description, take_by, date) VALUES($userId, $amount, '$description','$take_by', '$date');";
                 $result = $this->db->con->query($query);
                 if ($result) {
-                    $this->addBank($date);
+                    $this->addBank($date, 'none');
                     echo 'success';
                 } else {
                     echo 'failed';
@@ -196,7 +197,7 @@ class Functions
             $query = "INSERT INTO {$table} (type, amount, write_by, date) VALUES('$expense', $amount, '$write_by','$date');";
             $result = $this->db->con->query($query);
             if ($result) {
-                $this->addBank($date);
+                $this->addBank($date, 'expense');
                 echo 'success';
             } else {
                 echo 'failed';
@@ -269,7 +270,7 @@ class Functions
         }
     }
     // insert agreement time into database
-    public function addAgrtime($name, $phone, $amount, $recived, $startDate, $playDays, $endDate, $time, $wrote_by, $total, $date)
+    public function addAgrtime($name, $phone, $amount, $recived, $startDate, $playDays, $endDate, $time, $wrote_by, $date)
     {
         if ($name && $phone && $amount && $startDate && $playDays && $time && $wrote_by && $date) {
             $select = $this->db->con->query("SELECT * FROM custommer WHERE phone = '$phone';");
@@ -288,7 +289,7 @@ class Functions
                     while (mysqli_next_result($this->db->con)) {;
                     }
                     if ($insertEarn) {
-                        $this->addBank($date);
+                        $this->addBank($date, 'earn');
                         echo 'earn add successfully';
                     } else {
                         echo 'failed to add earn';
@@ -315,7 +316,7 @@ class Functions
                             while (mysqli_next_result($this->db->con)) {;
                             }
                             if ($insertEarn) {
-                                $this->addBank($date);
+                                $this->addBank($date, 'earn');
                                 echo 'earn add successfully';
                             } else {
                                 echo 'failed to add earn';
@@ -351,7 +352,7 @@ class Functions
                 while (mysqli_next_result($this->db->con)) {;
                 }
                 if ($insertEarn) {
-                    $this->addBank($date);
+                    $this->addBank($date, 'earn');
                     echo 'earn add successfully';
                 } else {
                     echo 'failed to add earn';
@@ -371,7 +372,7 @@ class Functions
                 $query = "INSERT INTO loans (custommer_id, amount, description) VALUES ({$row['custommer_id']},{$amount},'$description');";
                 $result = $this->db->con->query($query);
                 if ($result) {
-                    $this->addBank($date);
+                    $this->addBank($date, 'none');
                     echo 'loan added';
                 } else {
                     echo 'failed to add loan';
@@ -415,7 +416,7 @@ class Functions
         if ($id != null) {
             $result = $this->db->con->query("DELETE FROM {$table} WHERE loan_id = {$id}");
             if ($result) {
-                $this->addBank($date);
+                $this->addBank($date, 'none');
                 echo 'deleting has been done';
             } else {
                 echo 'failed to delete data';
@@ -582,12 +583,12 @@ class Functions
                 $select = $this->db->con->query("SELECT * FROM {$table} WHERE status = 'cancel' AND reg_id = {$id}");
                 $row = mysqli_fetch_assoc($select);
                 if ($result) {
-                    $query = "UPDATE earnings SET status = '$status', amount = {$row['recived']} WHERE reg_id = {$id};";
+                    $query = "UPDATE earnings SET status = '$status', amount = {$row['recived']}, date = '$date' WHERE reg_id = {$id};";
                     $result = $this->db->con->query($query);
                     while (mysqli_next_result($this->db->con)) {
                     }
                     if ($result) {
-                        $this->addBank($date);
+                        $this->addBank($date, 'earn');
                         echo ' earn updated successfully';
                     }
                 } else {
@@ -595,12 +596,12 @@ class Functions
                 }
             } else {
                 $query = "UPDATE {$table} SET status = '$status' WHERE reg_id = {$id};";
-                $query .= "UPDATE earnings SET status = '$status' WHERE reg_id = {$id};";
+                $query .= "UPDATE earnings SET status = '$status', date = '$date' WHERE reg_id = {$id};";
                 $result = $this->db->con->multi_query($query);
                 while (mysqli_next_result($this->db->con)) {
                 }
                 if ($result) {
-                    $this->addBank($date);
+                    $this->addBank($date, 'earn');
                     echo ' status updated';
                 } else {
                     echo 'failed to update status';
@@ -611,7 +612,7 @@ class Functions
         }
     }
     //updating agreement time status 
-    public function updateAgrStatus($id, $status, $table = 'agreement_time')
+    public function updateAgrStatus($id, $status, $date, $table = 'agreement_time')
     {
         if ($id && $status) {
             if ($status == "cancel") {
@@ -620,7 +621,7 @@ class Functions
                 $select = $this->db->con->query("SELECT * FROM {$table} WHERE status = 'cancel' AND agr_id = {$id}");
                 $row = mysqli_fetch_assoc($select);
                 if ($result) {
-                    $query = "UPDATE earnings SET status = '$status', amount = {$row['recived']} WHERE agr_id = {$id};";
+                    $query = "UPDATE earnings SET status = '$status', amount = {$row['recived']}, date = '$date' WHERE agr_id = {$id};";
                     $result = $this->db->con->query($query);
                     if ($result) {
                         echo 'earn updated successfully';
@@ -632,7 +633,7 @@ class Functions
                 }
             } else {
                 $query = "UPDATE {$table} SET status = '$status' WHERE agr_id = {$id};";
-                $query .= "UPDATE earnings SET status = '$status' WHERE agr_id = {$id};";
+                $query .= "UPDATE earnings SET status = '$status', date = '$date' WHERE agr_id = {$id};";
                 $result = $this->db->con->multi_query($query);
                 if ($result) {
                     echo 'status updated';
@@ -644,29 +645,14 @@ class Functions
             echo 'something went wrong';
         }
     }
-    //restore raddled regular times  
-    public function restoreReg($id, $table = 'regular_time')
-    {
-        if ($id != null) {
-            $query = "UPDATE {$table} SET status = 'waiting' WHERE reg_id = {$id};";
-            $query .= "UPDATE earnings SET status = 'waiting' WHERE reg_id = {$id};";
-            $result = $this->db->con->multi_query($query);
-            if ($result) {
-                echo 'status updated';
-            } else {
-                echo 'failed to update status';
-            }
-        } else {
-            echo 'something went wrong';
-        }
-    }
+
     // update agreement time 
     public function updateAgr($id, $amount, $recived, $startDate, $playDays, $endDate, $time, $wrote_by, $date)
     {
         if ($id && $amount && $startDate && $playDays && $time && $wrote_by && $date) {
             $query = "UPDATE agreement_time SET amount_per_hour = {$amount}, recived = {$recived}, start_date = '$startDate',
             end_date = '$endDate', play_days = {$playDays}, time = '$time' WHERE agr_id = {$id};";
-            $query .= "UPDATE earnings SET amount = {$recived} WHERE agr_id = {$id};";
+            $query .= "UPDATE earnings SET amount = {$recived}, date = '$date' WHERE agr_id = {$id};";
             $updateTime = $this->db->con->multi_query($query);
             if ($updateTime) {
                 echo 'agreement time updated successfully';
@@ -677,28 +663,82 @@ class Functions
             echo 'all field must be fill in';
         }
     }
-    // update receipts of agreement time
-    public function updateReceipt($id, $agr_id, $oldReceipt, $newReceipt, $date)
+
+    // get data and update bank
+    public function addBank($date, $type)
     {
-        if ($id && $agr_id && $oldReceipt && $newReceipt) {
-            $query = "UPDATE agreement_time SET recived = (recived - {$oldReceipt} + {$newReceipt}) WHERE agr_id = {$agr_id};";
-            $query .= "UPDATE earnings SET amount = (amount - {$oldReceipt} + {$newReceipt}) WHERE agr_id = {$agr_id};";
-            $query .= "UPDATE receipts SET receipt = {$newReceipt} WHERE receipt_id = {$id};";
-            $updateReceipt = $this->db->con->multi_query($query);
-            while (mysqli_next_result($this->db->con)) {;
+        $earn = 0; 
+        $expense = 0; 
+        // get total earnings
+        if($type === 'earn'){
+            $getEarn = $this->db->con->query("SELECT amount AS earn FROM earnings WHERE status = 'finish' OR status = 'cancel' ORDER BY date DESC LIMIT 1");
+            $earn = mysqli_fetch_assoc($getEarn);
+            $earn = $earn['earn']; 
+            if ($earn == null){
+                $earn = 0;
             }
-            if ($updateReceipt) {
-                $this->addBank($date);
-                echo 'success';
-            } else {
-                echo 'failed';
+        }
+        if($type === 'expense'){
+            // get total expenses
+            $getExpense = $this->db->con->query("SELECT amount AS expense FROM expenses ORDER BY date DESC LIMIT 1");
+            $expense = mysqli_fetch_assoc($getExpense);
+            $expense = $expense['expense']; 
+            if ($expense == null) {
+                $expense = 0;
             }
+        }
+        
+        // get total earnings
+        $getTotalEarn = $this->db->con->query("SELECT SUM(amount) AS earn FROM earnings WHERE status = 'finish' OR status = 'cancel'");
+        $totalEarn = mysqli_fetch_assoc($getTotalEarn);
+        if ($totalEarn['earn'] == null) {
+            $totalEarn['earn'] = 0;
+        }
+        // get total expenses
+        $getTotalExpense = $this->db->con->query("SELECT SUM(amount) AS expense FROM expenses");
+        $totalExpense = mysqli_fetch_assoc($getTotalExpense);
+        if ($totalExpense['expense'] == null) {
+            $totalExpense['expense'] = 0;
+        }
+        // get total picks
+        $getPick = $this->db->con->query("SELECT SUM(amount) AS pick FROM cache_book");
+        $pick = mysqli_fetch_assoc($getPick);
+        if ($pick['pick'] == null) {
+            $pick['pick'] = 0;
+        }
+        // get total loans
+        $getLoan = $this->db->con->query("SELECT SUM(amount) AS loan FROM loans");
+        $loan = mysqli_fetch_assoc($getLoan);
+        if ($loan['loan'] == null) {
+            $loan['loan'] = 0;
+        }
+        // calculate the gains and losses 
+
+        $gain = 0;
+        $loss = 0;
+        $calculate = $earn - $expense;
+        $totalMoney = $totalEarn['earn'] - ($totalExpense['expense'] + $pick['pick'] + $loan['loan']);
+        if ($totalMoney < 0) {
+            $totalMoney = 0;
+        }
+        if ($calculate < 0) {
+            $loss = abs($calculate);
+            $gain = 0;
+        } else if ($calculate > 0) {
+            $gain = $calculate;
+            $loss = 0;
+        }
+        $query = "INSERT INTO bank (earn, expense, loss, gain, total, updated_at) VALUES 
+        ($earn, $expense, {$loss}, {$gain}, {$totalMoney}, '$date');";
+        $result = $this->db->con->query($query);
+        if ($result) {
+            echo 'success bank';
         } else {
-            echo 'all field must be fill in';
+            echo 'failed bank';
         }
     }
-    // get data and update bank
-    public function addBank($date)
+    // get bank data from database 
+    public function getBank()
     {
         // get total earnings
         $getEarn = $this->db->con->query("SELECT SUM(amount) AS earn FROM earnings WHERE status = 'finish' OR status = 'cancel'");
@@ -706,12 +746,6 @@ class Functions
         if ($earn['earn'] == null) {
             $earn['earn'] = 0;
         }
-        // get regular times of agreement time
-        // $getReg = $this->db->con->query("SELECT SUM(amount) AS earn FROM regular_time WHERE status = 'finish' OR status = 'cancel' AND agr_id != NULL");
-        // $earnReg = mysqli_fetch_assoc($getReg);
-        // if($earnReg['earn'] == null){
-        //     $earnReg['earn'] = 0;
-        // }
         // get total expenses
         $getExpense = $this->db->con->query("SELECT SUM(amount) AS expense FROM expenses");
         $expense = mysqli_fetch_assoc($getExpense);
@@ -730,58 +764,12 @@ class Functions
         if ($loan['loan'] == null) {
             $loan['loan'] = 0;
         }
-        // calculate the gains and losses 
-
-        $gain = 0;
-        $loss = 0;
-        $calculate = $earn['earn'] - $expense['expense'];
-        $totalMoney = $earn['earn'] - ($expense['expense'] + $pick['pick'] + $loan['loan']);
-        if ($totalMoney < 0) {
-            $totalMoney = 0;
+        if($earn && $expense && $pick && $loan){
+            $bankArray = ['earn' => $earn['earn'], 'expense' => $expense['expense'], 'pick' => $pick['pick'], 'loan' => $loan['loan']]; 
+        }else{
+            $bankArray = []; 
         }
-        if ($calculate < 0) {
-            $loss = abs($calculate);
-            $gain = 0;
-        } else if ($calculate > 0) {
-            $gain = $calculate;
-            $loss = 0;
-        }
-        $query = "INSERT INTO bank (earn, expense, loss, gain, total, updated_at) VALUES 
-        ({$earn['earn']}, {$expense['expense']}, {$loss}, {$gain}, {$totalMoney}, '$date');";
-        $result = $this->db->con->query($query);
-        if ($result) {
-            echo 'success bank';
-        } else {
-            echo 'failed bank';
-        }
-    }
-    // get bank data from database 
-    public function getBank()
-    {
-        $query = "SELECT * FROM bank ORDER BY bank_id DESC limit 1";
-        $result = $this->db->con->query($query);
-        if ($result) {
-            // get total picks
-            $getPick = $this->db->con->query("SELECT SUM(amount) AS pick FROM cache_book");
-            $pick = mysqli_fetch_assoc($getPick);
-            if ($pick['pick'] == null) {
-                $pick['pick'] = 0;
-            }
-            // get total loans
-            $getLoan = $this->db->con->query("SELECT SUM(amount) AS loan FROM loans");
-            $loan = mysqli_fetch_assoc($getLoan);
-            if ($loan['loan'] == null) {
-                $loan['loan'] = 0;
-            }
-            $row = mysqli_fetch_assoc($result);
-            if ($row == null) {
-                $row = [];
-            }
-            array_push($row, $pick['pick'], $loan['loan']);
-            return json_encode($row);
-        } else {
-            echo 'something went wrong';
-        }
+        return json_encode($bankArray);
     }
     // get dashboard information from database 
     public function getInfo()
@@ -948,17 +936,20 @@ class Functions
             return json_encode($searchArray);
         }
     }
-    public function loginHandler($username, $password, $table = 'users'){
-        if(!empty($username) && !empty($password)){
-            $check = $this->db->con->query("SELECT * FROM {$table} WHERE username = '$username' AND password = '$password'");
-            
-            if(mysqli_num_rows($check) > 0){
+    public function loginHandler($username, $password, $table = 'users')
+    {
+        if (!empty($username) && !empty($password)) {
+            $Username = mysqli_real_escape_string($this->db->con, $username); 
+            $Password = mysqli_real_escape_string($this->db->con, $password);
+            $check = $this->db->con->query("SELECT * FROM {$table} WHERE username = '$Username' AND password = '$Password'");
+
+            if (mysqli_num_rows($check) > 0) {
                 $row = mysqli_fetch_assoc($check);
                 $user_id = $row['user_id'];
                 $username = $row['username'];
                 $position = $row['position'];
                 $photo = $row['photo'];
-              
+
 
                 $iss = 'localhost';
                 $iat = time();
@@ -966,19 +957,19 @@ class Functions
                 $exp = $iat + (60 * 60);
                 $aud = 'myusers';
                 $user_arr_data = array(
-                    "id"=> $user_id,
-                    "username"=> $username,
-                    "position"=> $position,
+                    "id" => $user_id,
+                    "username" => $username,
+                    "position" => $position,
                     "photo" => $photo,
                 );
 
                 $payload_info = array(
-                    "iss"=> $iss,
-                    "iat"=> $iat,
-                    "nbf"=> $nbf,
-                    "exp"=> $exp,
-                    "aud"=> $aud,
-                    "data"=> $user_arr_data
+                    "iss" => $iss,
+                    "iat" => $iat,
+                    "nbf" => $nbf,
+                    "exp" => $exp,
+                    "aud" => $aud,
+                    "data" => $user_arr_data
                 );
                 $secret_key = 'eeedrisss123';
 
@@ -989,62 +980,61 @@ class Functions
                     "status" => 1,
                     "token" => $token,
                     "expireAt" => $exp,
-                    "data" => $user_arr_data,
+                    "user" => $user_arr_data,
                     "message" => 'You login successfully!'
                 ));
-            }else{
-                http_response_code(404); 
+            } else {
                 echo json_encode(array(
                     "status" => 0,
                     "message" => 'invalid username or password'
                 ));
             }
-        }else{
+        } else {
             echo json_encode(array(
                 "status" => 0,
                 "message" => "all fields are needed"
             ));
         }
     }
-    public function auth($token){
+    public function auth($token)
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            if(!empty($token)){
+            if (!empty($token)) {
                 $jwt = str_replace('Bearer ', '', $token);
-                try{
+                try {
                     $secret_key = 'eeedrisss123';
                     $decode_data = JWT::decode($jwt, $secret_key, array('HS384'));
                     $data = $decode_data->data;
-                    if($data){
+                    if ($data) {
                         http_response_code(200);
                         echo json_encode(array(
                             "status" =>  1,
-                            "user" => $data, 
+                            "user" => $data,
                             "message" => 'success'
                         ));
-                    }else{
+                    } else {
                         echo json_encode(array(
                             "status" =>  0,
                             "message" => 'unauthorized'
                         ));
                     }
-                }catch(Exception $e){
+                } catch (Exception $e) {
                     echo json_encode(array(
                         "status" =>  0,
                         "message" => $e->getMessage()
                     ));
                 }
-                
-            }else{
+            } else {
                 echo json_encode(array(
-                    "status"=> 0,
-                    "message"=> "something went wrong"
+                    "status" => 0,
+                    "message" => "something went wrong"
                 ));
-            }     
-        }else{
+            }
+        } else {
             echo json_encode(array(
-                "status"=> 0,
-                "message"=> "this method is not supported"
+                "status" => 0,
+                "message" => "this method is not supported"
             ));
-        }     
+        }
     }
 }

@@ -31,37 +31,7 @@ export const getData = () => api.get('/getData.php').then(res => res.data);
 
 
 //actions delete, update ...
-//login page 
 
-export const LoginHandler = async (loginData) => {
-    try {
-        const response = await api.post('/loginHandler.php', loginData);
-        if (response.status == 200 && response.data.token && response.data.expireAt) {
-            let token = response.data.token;
-            let expire_at = response.data.expireAt;
-
-            localStorage.setItem('access_token', token);
-            localStorage.setItem('expire_time', expire_at);
-            return window.location.replace('/');
-        } else {
-            throw Error(response.data.message)
-        }
-    } catch (e) {
-        console.log(e)
-    }
-
-}
-//authorization
-export const Auth = async () => {
-
-    await api.get('/auth.php', {
-        headers: {
-            Authorization: 'Barear ' + localStorage.getItem('access_token')
-        }
-    })
-        .then(res => console.log(res.data))
-        .catch(error => console.log(error))
-}
 //delete user
 export const deleteUser = async (id) => {
     const response = await api.get(`/deleteUser.php?id=${id}`)

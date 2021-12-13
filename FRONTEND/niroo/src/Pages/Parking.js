@@ -12,11 +12,7 @@ function Parking() {
     const history = useHistory();
     const getPark = useQuery('parking', api.getParking);
     const addPark = useMutation(api.addPark);
-
-    if(addPark.isSuccess){
-        history.push('/parking');
-    }
-
+ 
     const options = [
         {key: 'Choes a vehicle', value: ''},
         {key: 'Bicycle', value: 'bicycle'},
@@ -63,7 +59,7 @@ function Parking() {
                                             <FormControl control='input' type='text' name='tax' label='Tax' placeholder='tax' />
                                         </div>
                                         <div className='col-lg-4'>
-                                            <button type='submit' disabled={!formik.isValid} className="btn btn-info mt-3">
+                                            <button type='submit' disabled={!formik.isValid} className="mt-3 btn btn-info">
                                                 {
                                                     addPark.isLoading?'add...':'Add Tax'
                                                 }
@@ -77,7 +73,7 @@ function Parking() {
                     </Formik>
                 </div>
                 <div className="add_time">
-                    <table className="table table-striped text-center">
+                    <table className="table text-center table-striped">
                         <thead>
                             <tr>
                                 <th>No</th>

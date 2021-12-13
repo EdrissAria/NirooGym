@@ -12,10 +12,8 @@ reactDom.render(
     <QueryClientProvider client={queryClient}>
         <React.StrictMode>
             <ContextProvider>
-                <Router>
-                  <App />
-                </Router>
+                <App />
             </ContextProvider>
         </React.StrictMode>
     </QueryClientProvider>
-, document.getElementById('root'));
+    , document.getElementById('root'));

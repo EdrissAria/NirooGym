@@ -11,4 +11,4 @@ $data = json_decode(file_get_contents("php://input"), true);
 
 $status = $data['status'];
  
-$func->updateAgrStatus($id, $status);
+$func->updateAgrStatus($id, $status, $date);

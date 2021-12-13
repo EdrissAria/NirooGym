@@ -1,27 +1,11 @@
-import React, { useRef, useEffect, useState } from 'react'
-import * as api from '../components/Api'
-import { Context } from '../components/Contexts/ContextProvider'
-import { Redirect } from 'react-router-dom'
-import { useMutation } from 'react-query'
+import React, { useState, useContext } from 'react'
+import axios from 'axios';
+import {Context} from '../components/Contexts/ContextProvider'
 
 function Login() {
-    const [loginData, setLoginData] = useState({ username: '', password: '' });
-    const login = useMutation(api.LoginHandler, {
-        retry: false, 
-        useErrorBoundary: true
-    });
+    const {loginData, setLoginData, isError , errorMessage, loginHandler} = useContext(Context); 
     const changeHandler = (e) => {
         setLoginData({ ...loginData, [e.target.name]: e.target.value })
-    }
-    const loginHandler = (e) => {
-        e.preventDefault();
-        login.mutate(loginData);
-    }
-    if (login.isLoading) {
-        return <h1>something wrong</h1>
-    }
-    if (login.isError) {
-        return <h1>error rrrrrrrrrrrrrrrrrr</h1>
     }
     return (
         <div className="login_container">
@@ -37,6 +21,7 @@ function Login() {
                     <div className="col-lg-6">
                         <div className="image_container"><img src="assets/img/profile.jpg" alt="login_image" className="login_image" /></div>
                         <div className="login_form">
+                        {isError&&<p style={{color: 'red'}}>{errorMessage.toString()}</p>}
                             <div className="input_group">
                                 <img src="assets/img/username.png" />
                                 <input type="text" name="username" className="login_input" placeholder="username" onChange={changeHandler} />

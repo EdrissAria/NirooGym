@@ -11,11 +11,12 @@ function RegisterdAgree() {
      
     return (
         <div>
-             <table className="table table-striped text-center">
+             <table className="table text-center table-striped">
                     <thead>
                         <tr>
                             <th>No</th>
                             <th>Name</th>
+                            <th>Phone</th>
                             <th>Amount/Hour</th>
                             <th>Recived</th>
                             <th>Cancel</th>

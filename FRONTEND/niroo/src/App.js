@@ -1,7 +1,6 @@
 import React, { useEffect, useContext } from 'react'
-import * as api from './components/Api'
 import Header from './components/Header'
-import { BrowserRouter as Router, Route, Switch, useHistory, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import RecordTime from './Pages/RecordTime'
 import RegisterdTime from './Pages/RegisterdTime'
 import Dashboard from './Pages/Dashboard'
@@ -24,23 +23,27 @@ import Loans from './Pages/Loans'
 import Bank from './Pages/Bank'
 import Login from './Pages/Login'
 import SearchPage from './Pages/SearchPage'
-import { useQuery } from 'react-query'
 import { Context } from './components/Contexts/ContextProvider'
 
 
 function App() {
-    const { userData } = useContext(Context)
+    const {auth} = useContext(Context); 
 
-    
-    if(window.location.pathname == '/login'){
+    useEffect(()=>{
+        auth(); 
+    }, []);
+
+    if (window.location.pathname == '/login') {
         return (
-            <Switch>
-                <Route exact path="/login" component={Login} />
-            </Switch>
+            <Router>
+                <Switch>
+                    <Route exact path="/login" component={Login} />
+                </Switch>
+            </Router>
         )
     }
     return (
-        <>
+        <Router>
             <Header />
             <Aside />
             <Switch>
@@ -66,7 +69,7 @@ function App() {
                 <Route path="/viewAgreementTime/:id" component={SingleAgrTime} />
                 <Route path="/updateAgreementTime/:id" component={UpdateAgr} />
             </Switch>
-        </>
+        </Router>
     )
 }
 

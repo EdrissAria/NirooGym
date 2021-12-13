@@ -6,6 +6,7 @@ import Title from '../components/Title'
 function Bank() {
     const bank = useQuery('bank', api.getBank);
     if (bank.isSuccess) {
+        console.log(bank.data)
         return (
             <div className="graph_area">
                 <div className="container">
@@ -31,7 +32,7 @@ function Bank() {
                                 </div>
                             </div>
                         </div>
-                        <div className="row mt-5">
+                        <div className="mt-5 row">
                             <div className="col col-lg-4">
                                 <div className="value_card card_4">
                                     <p>Total Gain</p>
@@ -41,16 +42,16 @@ function Bank() {
                             <div className="col col-lg-4">
                                 <div className="value_card card_5">
                                     <p>Total Picks</p>
-                                    <h4>{bank.data[0]} <span className="currency">AFN</span></h4>
+                                    <h4>{bank.data.pick} <span className="currency">AFN</span></h4>
                                 </div>
                             </div>
                             <div className="col col-lg-4">
                                 <div className="value_card card_6">
                                     <p>Total Loans</p>
-                                    <h4>{bank.data[1]} <span className="currency">AFN</span></h4>
+                                    <h4>{bank.data.loan} <span className="currency">AFN</span></h4>
                                 </div>
                             </div>
-                            <div className="col col-lg-12 mt-5">
+                            <div className="mt-5 col col-lg-12">
                                 <div className="value_card card_7">
                                     <p>Total Money In Bank</p>
                                     <h4>{bank.data.total == null?0:bank.data.total} <span className="currency">AFN</span></h4>
