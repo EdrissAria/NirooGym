@@ -4,7 +4,7 @@ import { useContext } from 'react/cjs/react.development'
 import { Context } from '../components/Contexts/ContextProvider'
 
 function Aside() {
-    const {logout} = useContext(Context);
+    const {logout, userData} = useContext(Context);
 
     return (
         <aside className="sidebar">
@@ -19,7 +19,7 @@ function Aside() {
             </ul>
             <ul className="bottom_sidebar_icon">
                 <li><Link to="/cache_book" title="Cache Book"><img src={'/assets/img/cache_book.png'}/></Link></li>
-                <li><img src={'/assets/img/bishak.png'} className="profile"/></li>
+                <li><img src={'/assets/upload/'+localStorage.getItem('photo')} className="profile"/></li>
             </ul>
         </aside>
     )

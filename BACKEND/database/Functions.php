@@ -667,27 +667,27 @@ class Functions
     // get data and update bank
     public function addBank($date, $type)
     {
-        $earn = 0; 
-        $expense = 0; 
+        $earn = 0;
+        $expense = 0;
         // get total earnings
-        if($type === 'earn'){
+        if ($type === 'earn') {
             $getEarn = $this->db->con->query("SELECT amount AS earn FROM earnings WHERE status = 'finish' OR status = 'cancel' ORDER BY date DESC LIMIT 1");
             $earn = mysqli_fetch_assoc($getEarn);
-            $earn = $earn['earn']; 
-            if ($earn == null){
+            $earn = $earn['earn'];
+            if ($earn == null) {
                 $earn = 0;
             }
         }
-        if($type === 'expense'){
+        if ($type === 'expense') {
             // get total expenses
             $getExpense = $this->db->con->query("SELECT amount AS expense FROM expenses ORDER BY date DESC LIMIT 1");
             $expense = mysqli_fetch_assoc($getExpense);
-            $expense = $expense['expense']; 
+            $expense = $expense['expense'];
             if ($expense == null) {
                 $expense = 0;
             }
         }
-        
+
         // get total earnings
         $getTotalEarn = $this->db->con->query("SELECT SUM(amount) AS earn FROM earnings WHERE status = 'finish' OR status = 'cancel'");
         $totalEarn = mysqli_fetch_assoc($getTotalEarn);
@@ -764,10 +764,10 @@ class Functions
         if ($loan['loan'] == null) {
             $loan['loan'] = 0;
         }
-        if($earn && $expense && $pick && $loan){
-            $bankArray = ['earn' => $earn['earn'], 'expense' => $expense['expense'], 'pick' => $pick['pick'], 'loan' => $loan['loan']]; 
-        }else{
-            $bankArray = []; 
+        if ($earn && $expense && $pick && $loan) {
+            $bankArray = ['earn' => $earn['earn'], 'expense' => $expense['expense'], 'pick' => $pick['pick'], 'loan' => $loan['loan']];
+        } else {
+            $bankArray = [];
         }
         return json_encode($bankArray);
     }
@@ -939,7 +939,7 @@ class Functions
     public function loginHandler($username, $password, $table = 'users')
     {
         if (!empty($username) && !empty($password)) {
-            $Username = mysqli_real_escape_string($this->db->con, $username); 
+            $Username = mysqli_real_escape_string($this->db->con, $username);
             $Password = mysqli_real_escape_string($this->db->con, $password);
             $check = $this->db->con->query("SELECT * FROM {$table} WHERE username = '$Username' AND password = '$Password'");
 
@@ -953,7 +953,7 @@ class Functions
 
                 $iss = 'localhost';
                 $iat = time();
-                $nbf = $iat + 10;
+                $nbf = $iat + 1;
                 $exp = $iat + (60 * 60);
                 $aud = 'myusers';
                 $user_arr_data = array(
@@ -999,35 +999,28 @@ class Functions
     public function auth($token)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            if (!empty($token)) {
-                $jwt = str_replace('Bearer ', '', $token);
-                try {
+            try {
+                if (!empty($token)) {
+                    $jwt = str_replace('Barear ', '', $token);
                     $secret_key = 'eeedrisss123';
                     $decode_data = JWT::decode($jwt, $secret_key, array('HS384'));
                     $data = $decode_data->data;
-                    if ($data) {
-                        http_response_code(200);
-                        echo json_encode(array(
-                            "status" =>  1,
-                            "user" => $data,
-                            "message" => 'success'
-                        ));
-                    } else {
-                        echo json_encode(array(
-                            "status" =>  0,
-                            "message" => 'unauthorized'
-                        ));
-                    }
-                } catch (Exception $e) {
+                    http_response_code(200);
                     echo json_encode(array(
-                        "status" =>  0,
-                        "message" => $e->getMessage()
+                        "status" =>  1,
+                        "user" => $data,
+                        "message" => 'success'
+                    ));
+                } else {
+                    echo json_encode(array(
+                        "status" => 0,
+                        "message" => "Login required!"
                     ));
                 }
-            } else {
+            } catch (Exception $e) {
                 echo json_encode(array(
-                    "status" => 0,
-                    "message" => "something went wrong"
+                    "status" =>  0,
+                    "message" => $e->getMessage()
                 ));
             }
         } else {

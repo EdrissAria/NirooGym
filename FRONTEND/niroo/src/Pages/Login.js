@@ -3,7 +3,7 @@ import axios from 'axios';
 import {Context} from '../components/Contexts/ContextProvider'
 
 function Login() {
-    const {loginData, setLoginData, isError , errorMessage, loginHandler} = useContext(Context); 
+    const {loginData, setLoginData, isError , errorMessage, loginHandler } = useContext(Context); 
     const changeHandler = (e) => {
         setLoginData({ ...loginData, [e.target.name]: e.target.value })
     }

@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react'
 import Header from './components/Header'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import RecordTime from './Pages/RecordTime'
 import RegisterdTime from './Pages/RegisterdTime'
 import Dashboard from './Pages/Dashboard'
@@ -24,15 +24,13 @@ import Bank from './Pages/Bank'
 import Login from './Pages/Login'
 import SearchPage from './Pages/SearchPage'
 import { Context } from './components/Contexts/ContextProvider'
-
+import axios from 'axios'
 
 function App() {
-    const {auth} = useContext(Context); 
+    const {userData} = useContext(Context)
 
-    useEffect(()=>{
-        auth(); 
-    }, []);
-
+    console.log('user',userData)
+    
     if (window.location.pathname == '/login') {
         return (
             <Router>
@@ -41,6 +39,9 @@ function App() {
                 </Switch>
             </Router>
         )
+    }
+    if(!localStorage.getItem('access_token')){
+        window.location.pathname = '/login'; 
     }
     return (
         <Router>

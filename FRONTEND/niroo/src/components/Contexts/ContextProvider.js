@@ -2,19 +2,21 @@ import { createContext, useState, useEffect } from "react";
 import * as api from '../Api'
 import { useMutation, useQuery } from "react-query";
 import axios from "axios";
-import { Redirect } from "react-router";
+import { Redirect , useHistory} from "react-router";
 
-axios.defaults.baseURL = 'http://localhost/NIROO GYM/BACKEND/'; 
+axios.defaults.baseURL = 'http://localhost/NIROO GYM/BACKEND/';
 
 export const Context = createContext();
 
 const ContextProvider = (props) => {
+    const history = useHistory();  
     //states of context api 
     const [loginData, setLoginData] = useState({ username: '', password: '' });
     const [isError, setIsError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [search, setSearch] = useState('');
     const [userData, setUserData] = useState({});
+     
 
     //api for searching 
     const searching = useQuery(['searching', search], () => api.searching(search));
@@ -35,10 +37,17 @@ const ContextProvider = (props) => {
 
                 localStorage.setItem('access_token', token);
                 localStorage.setItem('expire_time', expire_at);
-                setIsError(false);
+                localStorage.setItem('user_id', response.data.user.id);
+                localStorage.setItem('username', response.data.user.username);
+                localStorage.setItem('position', response.data.user.position);
+                localStorage.setItem('photo', response.data.user.photo);
+
+             
+                
+                // window.location.pathname = '/'
                 setUserData(response.data.user)
-                console.log(userData)
-                return <Redirect to={'/'} />
+                setIsError(false);
+               
             } else {
                 throw Error(response.data.message)
             }
@@ -46,27 +55,15 @@ const ContextProvider = (props) => {
             setIsError(true)
             setErrorMessage(e)
         }
-    }
-
-    /*_______________________________________________________Authorization______________________________________________________________*/
-    const auth = async () => {
-        try {
-            const authorize = await axios.get('auth.php', {
-                headers: {
-                    Authorization: 'Barear ' + localStorage.getItem('access_token')
-                }
-            })
-            console.log(authorize)
-             
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
+    }   
     /*________________________________________________________logout__________________________________________________________________*/
     const logout = () => {
         localStorage.removeItem('access_token');
         localStorage.removeItem('expire_time');
+        localStorage.removeItem('user_id');
+        localStorage.removeItem('username');
+        localStorage.removeItem('position');
+        localStorage.removeItem('photo');
         setUserData({});
         window.location.replace('/login')
     }
@@ -80,13 +77,11 @@ const ContextProvider = (props) => {
         searching,
         logout,
         userData,
-        setUserData,
         loginData,
         setLoginData,
         isError,
         errorMessage,
         loginHandler,
-        auth
     }
     return (
         <Context.Provider value={value}>

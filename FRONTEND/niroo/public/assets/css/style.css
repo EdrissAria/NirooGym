@@ -188,6 +188,7 @@ aside.sidebar {
 
 .bottom_sidebar_icon li .profile {
     width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: 2px solid #049148;
 }
