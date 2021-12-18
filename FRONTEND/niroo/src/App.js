@@ -29,7 +29,7 @@ import axios from 'axios'
 function App() {
     const {userData} = useContext(Context)
 
-    console.log('user',userData)
+   
     
     if (window.location.pathname == '/login') {
         return (

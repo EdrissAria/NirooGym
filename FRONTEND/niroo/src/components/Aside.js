@@ -5,7 +5,7 @@ import { Context } from '../components/Contexts/ContextProvider'
 
 function Aside() {
     const {logout, userData} = useContext(Context);
-
+    console.log('photo:',userData)
     return (
         <aside className="sidebar">
             <img src={'/assets/img/logo.png'} />
@@ -19,7 +19,7 @@ function Aside() {
             </ul>
             <ul className="bottom_sidebar_icon">
                 <li><Link to="/cache_book" title="Cache Book"><img src={'/assets/img/cache_book.png'}/></Link></li>
-                <li><img src={'/assets/upload/'+localStorage.getItem('photo')} className="profile"/></li>
+                <li><img src={`/assets/upload/${userData?userData.photo:'aria.png'}`} className="profile"/></li>
             </ul>
         </aside>
     )

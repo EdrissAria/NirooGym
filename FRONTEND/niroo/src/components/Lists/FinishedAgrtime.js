@@ -13,7 +13,7 @@ function FinishedAgrtime({ time, no }) {
             <td>{time.end_date}</td>
             <td>{time.play_days}</td>
             <td>{time.time}</td>
-            <td>{time.status=== "cancel"?<p style={{color:'red'}}>{time.status}</p>:time.status}</td>
+            <td>{time.status === "cancel"?<p style={{color:'red'}}>{time.status}</p>:time.status}</td>
             <td>{time.wrote_by}</td>
             <td>{time.total}</td>
          </tr>

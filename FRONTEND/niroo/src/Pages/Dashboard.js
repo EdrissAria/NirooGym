@@ -11,30 +11,31 @@ import Login from './Login'
 function Dashboard() {
     const dashboard = useQuery('dashboard', api.getInfo);
     const getData = useQuery('data', api.getData);
+    const {userData} = useContext(Context); 
      
     if (dashboard.isSuccess && getData.isSuccess) {
         return (
             <div className="graph_area">
                 <div className="container">
-                    <Title linkTo="/recordTime" title="Welcome" subTitle={localStorage.getItem('username')} buttonValue="Record a new time" />
+                    <Title linkTo="/recordTime" title="Welcome" subTitle={userData?userData.username:'Guest'} buttonValue="Record a new time" />
                     <div className="value_cards_sec">
                         <div className="row">
                             <div className="col col-lg-4">
                                 <div className="value_card card_4">
                                     <p>Total Paid Times</p>
-                                    <h3>{dashboard.data[0]}</h3>
+                                    <h3>{dashboard.data.totalPlays}</h3>
                                 </div>
                             </div>
                             <div className="col col-lg-4">
                                 <div className="value_card card_6">
                                     <p>Waiting Times</p>
-                                    <h3>{dashboard.data[2]}</h3>
+                                    <h3>{dashboard.data.totalWait}</h3>
                                 </div>
                             </div>
                             <div className="col col-lg-4">
                                 <div className="value_card card_7">
                                     <p>cancellations</p>
-                                    <h3>{dashboard.data[1]}</h3>
+                                    <h3>{dashboard.data.totalCancel}</h3>
                                 </div>
                             </div>
                         </div>

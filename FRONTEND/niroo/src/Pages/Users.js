@@ -14,9 +14,7 @@ import Loading from '../components/Loading'
 function Users() {
     const getUsers = useQuery('users', api.getUser);
     const addUser = useMutation(api.addUser);
-    if(addUser.isSuccess){
-        window.location.reload();
-    }
+     
     const options = [
         { key: 'Choes a position', value: '' },
         { key: 'Admin', value: 'admin' },
@@ -80,7 +78,7 @@ function Users() {
                                                     <FormControl control='file' formik={formik} name='photo' label='Choose Photo' />
                                                 </div>
                                                 <div className='col-lg-4'>
-                                                    <button type='submit' disabled={!formik.isValid} name='submit_user' className="btn btn-info mt-3">{
+                                                    <button type='submit' disabled={!formik.isValid} name='submit_user' className="mt-3 btn btn-info">{
                                                         addUser.isLoading ? 'loading' : 'Add New User'
                                                     }</button>
                                                 </div>

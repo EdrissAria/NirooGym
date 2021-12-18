@@ -6,10 +6,10 @@ import FinishedAgrtime from './Lists/FinishedAgrtime';
 function AgreementTimesTable() {
     const getAgr = useQuery('finishedTime', () => api.getAgrtime('finish'));
     if(getAgr.isSuccess){
-         
+         console.log('finished: ', getAgr.data)
     return (
         <div>
-            <table className="table agrTable table-striped text-center">
+            <table className="table text-center agrTable table-striped">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -29,7 +29,7 @@ function AgreementTimesTable() {
                 </thead>
                 <tbody>
                      {
-                         getAgr.data.map((time, index)=> <FinishedAgrtime key={time.agr_id} time={time} no={index}/>)
+                        getAgr.data.map((time, index)=> <FinishedAgrtime key={index} time={time} no={index}/>)
                      }
                 </tbody>
             </table>

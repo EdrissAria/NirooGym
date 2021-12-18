@@ -6,7 +6,7 @@ import Title from '../components/Title'
 function Bank() {
     const bank = useQuery('bank', api.getBank);
     if (bank.isSuccess) {
-        console.log(bank.data)
+        console.log('bank: ',bank.data)
         return (
             <div className="graph_area">
                 <div className="container">

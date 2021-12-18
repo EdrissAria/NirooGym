@@ -5,6 +5,7 @@ import axios from "axios";
 import { Redirect , useHistory} from "react-router";
 
 axios.defaults.baseURL = 'http://localhost/NIROO GYM/BACKEND/';
+axios.defaults.headers.common['Authorization'] = 'Barear '+ localStorage.getItem('access_token'); 
 
 export const Context = createContext();
 
@@ -37,14 +38,9 @@ const ContextProvider = (props) => {
 
                 localStorage.setItem('access_token', token);
                 localStorage.setItem('expire_time', expire_at);
-                localStorage.setItem('user_id', response.data.user.id);
-                localStorage.setItem('username', response.data.user.username);
-                localStorage.setItem('position', response.data.user.position);
-                localStorage.setItem('photo', response.data.user.photo);
-
-             
                 
-                // window.location.pathname = '/'
+                
+                window.location.pathname = '/'
                 setUserData(response.data.user)
                 setIsError(false);
                
@@ -56,6 +52,12 @@ const ContextProvider = (props) => {
             setErrorMessage(e)
         }
     }   
+    /*________________________________________________________Authorization____________________________________________________________*/
+    useEffect(()=>{
+        axios.get('auth.php')
+        .then(res=> setUserData(res.data.user))
+        .catch(error=> console.log(error))
+    }, [])
     /*________________________________________________________logout__________________________________________________________________*/
     const logout = () => {
         localStorage.removeItem('access_token');
