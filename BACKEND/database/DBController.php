@@ -1,4 +1,8 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: *');
+header('Access-Control-Allow-Credentials: true');
+
 class DBController{
     protected $host = "localhost";
     protected $user = "root";
@@ -22,7 +26,6 @@ class DBController{
         if($this->con != null){
             $this->con->close();
             $this->con = null;
-            
         }
     }
 }

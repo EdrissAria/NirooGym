@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
@@ -10,11 +10,18 @@ import { useQuery, useMutation } from 'react-query'
 import UserList from '../components/Lists/UserList'
 import { Redirect } from 'react-router'
 import Loading from '../components/Loading'
+import {Context} from '../components/Contexts/ContextProvider'
 
 function Users() {
-    const getUsers = useQuery('users', api.getUser);
+    const {userData} = useContext(Context); 
+   
+    const getUsers = useQuery('users', api.getUser, {
+        retry: 3
+    });
     const addUser = useMutation(api.addUser);
-     
+    if(addUser.isSuccess){
+        getUsers.refetch(); 
+    }     
     const options = [
         { key: 'Choes a position', value: '' },
         { key: 'Admin', value: 'admin' },
@@ -32,14 +39,15 @@ function Users() {
         position: Yup.string().required('! Required'),
         photo: Yup.string().required('! Required')
     })
-
+ 
     const onSubmit = values => {
         // uploading the imgage
-        let upload = new FormData();
-        upload.append('photo', values.photo);
-        api.uploadFile(upload);
+        // let upload = new FormData();
+        // upload.append('photo', values.photo);
+        // api.uploadFile(upload);
         // sending data to database
         let userdata = {
+            created_by: userData.username,
             username: values.username,
             password: values.password,
             position: values.position,
@@ -50,7 +58,7 @@ function Users() {
     
     return (
         <div>
-        {getUsers.isLoading?<Loading size={100} />:
+       
             <div className="addpro_form">
                 <div className="container">
                     <Title linkTo="/" title="Add New" subTitle="User" buttonValue="Back To Dashboard" />
@@ -89,7 +97,8 @@ function Users() {
                             }
                         </Formik>
                     </div>
-                    <div className="add_time">
+                    {getUsers.isSuccess?
+                        <div className="add_time">
                         <table className="table table-striped">
                                 <thead>
                                     <tr>
@@ -109,10 +118,9 @@ function Users() {
                                     }                                    
                                 </tbody>
                             </table>
-                    </div>
+                    </div>:getUsers.isError?'error':<Loading size={100} />}
                 </div>
             </div>
-           }
         </div>
     )
 }

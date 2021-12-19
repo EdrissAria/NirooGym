@@ -13,9 +13,9 @@ function UserUpdate() {
     const getUser = useQuery(['user', id], () => api.getSingleUser(id));
     const updateUser = useMutation(api.updateUser);
 
-    if(updateUser.isSuccess){
-        return <Redirect to="/users" />
-    }
+    // if(updateUser.isSuccess){
+    //     return <Redirect to="/users" />
+    // }
     const options = [
         { key: 'Choes a position', value: '' },
         { key: 'Admin', value: 'admin' },

@@ -8,7 +8,7 @@ const api = axios.create({
 })
 // getting data from database
 export const getEarning = (earn) => api.get(`/getEarn.php?earn=${earn}`).then(res => res.data);
-export const getUser = () => api.get('/getUser.php').then(res => res.data);
+export const getUser = () => api.get('/getUser.php').then(res => res.data).catch(e=>console.log(e));
 export const getSingleUser = (id) => api.get(`/getSingleUser.php?id=${id}`).then(res => res.data);
 export const getSingleStaff = (id) => api.get(`/getSingleStaff.php?id=${id}`).then(res => res.data);
 export const getSingleReg = (id) => api.get(`/getSingleReg.php?id=${id}`).then(res => res.data);
@@ -28,6 +28,7 @@ export const getPayedRegtime = () => api.get('/getPayedRegtime.php').then(res =>
 export const getBank = () => api.get('/getBank.php').then(res => res.data);
 export const getInfo = () => api.get('/getInfo.php').then(res => res.data);
 export const getData = () => api.get('/getData.php').then(res => res.data);
+export const getErrors = () => api.get('/database/DBController.php').then(res => res.data).catch(e=>console.log(e));
 
 
 //actions delete, update ...

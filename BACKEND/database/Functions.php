@@ -12,16 +12,21 @@ class Functions
     // constactor function
     public function __construct(DBController $db)
     {
-        if (!isset($db->con)) {
-            return null;
-        } else {
-            $this->db = $db;
+        try {
+            if (!isset($db->con)) {
+                return null;
+            } else {
+                $this->db = $db;
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage(); 
         }
     }
 
     // getting data 
     public function getData($table = 'users')
     {
+        try{
         $result = $this->db->con->query("SELECT * FROM {$table}");
         if ($result) {
             $arr = [];
@@ -29,7 +34,14 @@ class Functions
                 $arr[] = $row;
             }
             return $arr;
-        }
+        } 
+    }catch(Exception $e){
+        http_response_code(404); 
+        echo json_encode(array([
+            "status" => 0, 
+            "message" => $e->getMessage()
+        ]));
+    }
     }
     // getting regular time
     public function getRegtime($status, $table1 = 'custommer', $table2 = 'regular_time', $pid = 'custommer.custommer_id', $fid = 'regular_time.custommer_id')
@@ -117,12 +129,23 @@ class Functions
             VALUES ('$name', '$password', '$position', '$photo', '$created_by', '$date');";
             $result = $this->db->con->query($query);
             if ($result) {
-                echo "success";
+                http_response_code(200);
+                echo json_encode(array([
+                    "status" => 1,
+                    "message" => "User Added Successfully"
+                ]));
             } else {
-                echo "failed";
+                http_response_code(404);
+                echo json_encode(array([
+                    "status" => 0,
+                    "message" => "There is a probem,please try again"
+                ]));
             }
         } else {
-            echo 'something went wrong';
+            echo json_encode(array([
+                "status" => 0,
+                "message" => "all feild are required"
+            ]));
         }
     }
     // insert staff into database 
@@ -713,13 +736,13 @@ class Functions
             $loan['loan'] = 0;
         }
         // calculate the gains and losses 
- 
-      
+
+
         $totalMoney = $totalEarn['earn'] - ($totalExpense['expense'] + $pick['pick'] + $loan['loan']);
         if ($totalMoney < 0) {
             $totalMoney = 0;
         }
-         
+
         $query = "INSERT INTO bank (earn, expense, total, updated_at) VALUES 
         ($earn, $expense, {$totalMoney}, '$date');";
         $result = $this->db->con->query($query);
@@ -734,8 +757,8 @@ class Functions
     {
         // get total earnings, expenses, gains, losses
         $getdata = $this->db->con->query("SELECT SUM(earn) as earn ,SUM(expense) as expense ,updated_at FROM bank");
-        $getTotalMoney = $this->db->con->query("SELECT total FROM bank ORDER BY bank_id DESC LIMIT 1"); 
-        $total = mysqli_fetch_assoc($getTotalMoney); 
+        $getTotalMoney = $this->db->con->query("SELECT total FROM bank ORDER BY bank_id DESC LIMIT 1");
+        $total = mysqli_fetch_assoc($getTotalMoney);
         $data = mysqli_fetch_assoc($getdata);
         $earn = $data['earn'];
         $expense = $data['expense'];
@@ -965,7 +988,7 @@ class Functions
                 $iss = 'localhost';
                 $iat = time();
                 $nbf = $iat + 1;
-                $exp = $iat + (60 * 60);
+                $exp = $iat + (60 * 60 * 24);
                 $aud = 'myusers';
                 $user_arr_data = array(
                     "id" => $user_id,
