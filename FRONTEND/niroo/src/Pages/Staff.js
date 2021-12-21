@@ -12,9 +12,9 @@ function Staff() {
     const getStaff = useQuery('staff', api.getStaff);
     const addStaff = useMutation(api.addStaff);
     
-     if(addStaff.isSuccess){
-        window.location.reload();
-     }
+    if(addStaff.isSuccess){
+        getStaff.refetch();     
+    }
 
     const initialValues = {
         name: '',

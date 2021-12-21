@@ -9,7 +9,7 @@ import Aside from './components/Aside'
 import PaidTimes from './Pages/PaidTimes'
 import Expences from './Pages/Expences'
 import Earnings from './Pages/Earnings'
-import CacheBook from './Pages/CacheBook'
+import CashBook from './Pages/CashBook'
 import Staff from './Pages/Staff'
 import Users from './Pages/Users'
 import Parking from './Pages/Parking'
@@ -30,10 +30,10 @@ import { useQuery } from 'react-query'
 function App() {
     const {userData} = useContext(Context)
 
-    const getError = useQuery('errors', api.getErrors); 
-    if(getError.isSuccess){
-        return getError.data;
-    }
+    // const getError = useQuery('errors', api.getErrors); 
+    // if(getError.isSuccess){
+    //     return getError.data;
+    // }
     if (window.location.pathname == '/login') {
         return (
             <Router>
@@ -59,7 +59,7 @@ function App() {
                 <Route path="/paidTimes" component={PaidTimes} />
                 <Route path="/expences" component={Expences} />
                 <Route path="/earnings" component={Earnings} />
-                <Route path="/cache_book" component={CacheBook} />
+                <Route path="/cash_book" component={CashBook} />
                 <Route path="/staff" component={Staff} />
                 <Route path="/users" component={Users} />
                 <Route path="/parking" component={Parking} />

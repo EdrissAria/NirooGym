@@ -74,7 +74,7 @@ function Dashboard() {
                                                 {
                                                     labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
                                                     datasets: [{
-                                                        label: "Your Wise Business "+new Date(dashboard.data.updated_at).toDateString(),
+                                                        label: "Your Wise Business "+new Date(dashboard.data.date.date).toDateString(),
                                                         data: getData.data,
                                                         backgroundColor: [
                                                             '#fe7379',

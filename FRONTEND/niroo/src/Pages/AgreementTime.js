@@ -9,9 +9,7 @@ import { useMutation } from 'react-query'
 
 function AgreementTime() {
     const addAgr = useMutation(api.addAgrtime)
-    // if(addAgr.isSuccess){
-    //     window.location.reload();
-    // }
+   
 
     const options = [
         { key: 'Saturday', value: 'saturday' },
@@ -99,7 +97,9 @@ function AgreementTime() {
                                                 <FormControl control='input' type='text' name='time' label='Time' placeholder='00 am/pm, 00 am/pm ...' />
                                             </div>
                                             <div className='col-lg-4 mt-3'>
-                                                <button type='submit' disabled={!formik.isValid} className='btn btn-info'>Add New Time</button>
+                                                <button type='submit' disabled={!formik.isValid} className='btn btn-info'>
+                                                    {addAgr.isLoading?'Adding..':'Add New Time'}
+                                                </button>
                                             </div>
                                         </div>
                                     </Form>

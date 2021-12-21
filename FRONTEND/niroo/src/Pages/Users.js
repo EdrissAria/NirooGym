@@ -42,9 +42,10 @@ function Users() {
  
     const onSubmit = values => {
         // uploading the imgage
-        // let upload = new FormData();
-        // upload.append('photo', values.photo);
-        // api.uploadFile(upload);
+        let upload = new FormData();
+        upload.append('photo', values.photo);
+        api.uploadFile(upload);
+
         // sending data to database
         let userdata = {
             created_by: userData.username,

@@ -17,7 +17,7 @@ function LoanList({loan, no}) {
             <td>{loan.name}</td>
             <td>{loan.phone}</td>
             <td>{loan.amount}</td>
-            <td>{loan.description}</td>
+            <td>{loan.description?loan.deleteLoan:'no description'}</td>
             <td><button onClick={()=> deleteLoan(loan.loan_id)} className="btn btn-warning">
                 {
                     delLoan.isLoading?'finishing...':'finish'

@@ -9,10 +9,13 @@ import ParkList from '../components/Lists/ParkList'
 import Title from '../components/Title'
 
 function Parking() {
-    const history = useHistory();
+
     const getPark = useQuery('parking', api.getParking);
     const addPark = useMutation(api.addPark);
- 
+    
+    if(addPark.isSuccess){
+        getPark.refetch(); 
+    }
     const options = [
         {key: 'Choes a vehicle', value: ''},
         {key: 'Bicycle', value: 'bicycle'},

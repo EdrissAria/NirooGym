@@ -388,7 +388,7 @@ class Functions
     // add loans 
     public function addLoan($loaner, $phone, $amount, $description, $date)
     {
-        if ($loaner && $phone && $amount && $description && $date) {
+        if ($loaner && $phone && $amount && $date) {
             $select = $this->db->con->query("SELECT * FROM custommer WHERE phone = '$phone'");
             $row = mysqli_fetch_assoc($select);
             if ($row) {
@@ -550,7 +550,7 @@ class Functions
             $match = "SELECT * FROM {$table} WHERE user_id = {$id} AND password = '$password'";
             $user = $this->db->con->query($match);
             $row = mysqli_num_rows($user);
-            if ($row == 1) {
+            if ($row > 0) {
                 $result = $this->db->con->query("UPDATE {$table} SET username = '$username', password='$new_password',
                 position='$position', photo='$photo' WHERE {$id} = user_id");
                 if ($result) {
@@ -559,7 +559,11 @@ class Functions
                     echo "failed";
                 }
             } else {
-                echo "password does not match";
+                http_response_code(404); 
+                echo json_encode(array(
+                    "status" => 0, 
+                    "message" => "The old password is wrong"
+                )); 
             }
         } else {
             "something went wrong";
@@ -853,6 +857,7 @@ class Functions
         $totalPlays = count($agrArray) + count($regArray);
 
         $totalWaiting = count($agrWaitArray) + count($regWaitArray);
+        $now = new DateTime(); 
 
         $info = [
             'earn' => $earn,
@@ -860,7 +865,8 @@ class Functions
             'loss' => $loss,
             'totalPlays' => $totalPlays,
             'totalCancel' => $totalCancelation,
-            'totalWait' => $totalWaiting
+            'totalWait' => $totalWaiting,
+            'date' => $now
         ];
 
         return json_encode($info);

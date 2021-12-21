@@ -16,6 +16,14 @@ function UserUpdate() {
     // if(updateUser.isSuccess){
     //     return <Redirect to="/users" />
     // }
+    if(updateUser.isSuccess){
+        console.log(updateUser.data); 
+    }
+
+    if(updateUser.isError){
+        return '<h1>error</h1>'; 
+    }
+    
     const options = [
         { key: 'Choes a position', value: '' },
         { key: 'Admin', value: 'admin' },

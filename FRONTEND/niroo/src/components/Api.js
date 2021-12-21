@@ -49,7 +49,7 @@ export const deleteLoan = async (id) => {
 //update users 
 export const updateUser = async ({ id, ...updatedUser }) => {
     const { data } = await api.put(`/updateUser.php?id=${id}`, updatedUser);
-    return data;
+    // return data;
 }
 
 // update staff

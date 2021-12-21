@@ -18,7 +18,7 @@ function Aside() {
                 <li><button onClick={logout} className="logout_btn"><img src="/assets/img/exit.png"/></button></li>
             </ul>
             <ul className="bottom_sidebar_icon">
-                <li><Link to="/cache_book" title="Cache Book"><img src={'/assets/img/cache_book.png'}/></Link></li>
+                <li><Link to="/cash_book" title="Cache Book"><img src={'/assets/img/cash_book.png'}/></Link></li>
                 <li><img src={`/assets/upload/${userData?userData.photo:'aria.png'}`} className="profile"/></li>
             </ul>
         </aside>

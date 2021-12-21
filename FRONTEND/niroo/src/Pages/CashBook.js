@@ -8,7 +8,7 @@ import * as api from '../components/Api'
 import BookList from '../components/Lists/BookList'
 import Title from '../components/Title'
 
-function CacheBook() {
+function CashBook() {
     const getBook = useQuery('book', api.getBook);
     const addBook = useMutation(api.addBook);
 
@@ -90,4 +90,4 @@ function CacheBook() {
     )
 }
 
-export default CacheBook
+export default CashBook

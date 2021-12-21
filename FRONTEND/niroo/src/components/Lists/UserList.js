@@ -12,7 +12,7 @@ function UserList({ user, no }) {
     const deleteuser = (id)=>{
         info.mutate(id)
     }
-
+     
     return (
         <tr>
             <td>{no + 1}</td>

@@ -3,7 +3,7 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: *');
  
 
- 
+// 
 
 $response = array();
 $upload_dir = '../FRONTEND/niroo/public/assets/upload/';

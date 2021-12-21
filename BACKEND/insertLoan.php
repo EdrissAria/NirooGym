@@ -11,5 +11,6 @@ $loaner = $data['loaner'];
 $phone = $data['phone'];
 $amount = $data['amount'];
 $descrition = $data['description'];
+ 
 
 $func->addLoan($loaner, $phone, $amount, $descrition, $date);

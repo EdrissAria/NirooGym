@@ -12,9 +12,9 @@ function Loans() {
     const getLoan = useQuery('loans', api.getLoan);
     const addLoan = useMutation(api.addLoan);
 
-    // if(addLoan.isSuccess){
-    //     return <Redirect to="/loans"/>
-    // }
+    if(addLoan.isSuccess){
+        getLoan.refetch(); 
+    }
 
     const initialValues = {
         loaner: '',
@@ -64,7 +64,7 @@ function Loans() {
                                                     <FormControl control='input' type='text' name='amount' label='Amount' placeholder='loan' />
                                                 </div>
                                                 <div className="col-lg-6">
-                                                    <FormControl control='input' type='text' name='description' label='Description' placeholder='option' />
+                                                    <FormControl control='input' type='text' name='description' label='Description' placeholder='optional' />
                                                 </div>
                                                 <div className='col-lg-4'>
                                                     <button type='submit' disabled={!formik.isValid} className="btn btn-info mt-3">
