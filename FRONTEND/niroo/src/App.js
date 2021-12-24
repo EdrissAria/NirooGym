@@ -34,6 +34,7 @@ function App() {
     // if(getError.isSuccess){
     //     return getError.data;
     // }
+    
     if (window.location.pathname == '/login') {
         return (
             <Router>

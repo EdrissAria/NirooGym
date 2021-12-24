@@ -62,10 +62,7 @@ const ContextProvider = (props) => {
     const logout = () => {
         localStorage.removeItem('access_token');
         localStorage.removeItem('expire_time');
-        localStorage.removeItem('user_id');
-        localStorage.removeItem('username');
-        localStorage.removeItem('position');
-        localStorage.removeItem('photo');
+        
         setUserData({});
         window.location.replace('/login')
     }
