@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import {Formik, Form} from 'formik'
 import * as Yup from 'yup'
@@ -7,12 +7,15 @@ import * as api from '../components/Api'
 import { useMutation, useQuery } from 'react-query'
 import ExpencesList from '../components/Lists/ExpencesList'
 import Title from '../components/Title'
+import {Context} from '../components/Contexts/ContextProvider'
 
 function Expences() {
     const getExpence = useQuery('expence', api.getExpence);
-    const addExpense = useMutation(api.addExpense)
+    const addExpense = useMutation(api.addExpense); 
+    const {userData} = useContext(Context); 
+
     // if(addExpense.isSuccess){
-    //     window.location.reload();
+    //     getExpence.refetch(); 
     // }
     const initialValues = {
         type: '',
@@ -25,6 +28,7 @@ function Expences() {
     })
     const onSubmit = values=>{
         const expenseData = {
+            write_by: userData.user,
             expense: values.type,
             amount: values.amount
         }

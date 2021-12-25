@@ -41,8 +41,7 @@ const ContextProvider = (props) => {
                 
                 
                 window.location.pathname = '/'
-                setUserData(response.data.user)
-                setIsError(false);
+            
                
             } else {
                 throw Error(response.data.message)
@@ -55,9 +54,12 @@ const ContextProvider = (props) => {
     /*________________________________________________________Authorization____________________________________________________________*/
     useEffect(()=>{
         axios.get('auth.php')
-        .then(res=> setUserData(res.data.user))
+        .then(res=> {
+            setUserData(res.data.user) 
+        })
         .catch(error=> console.log(error))
     }, [])
+     
     /*________________________________________________________logout__________________________________________________________________*/
     const logout = () => {
         localStorage.removeItem('access_token');

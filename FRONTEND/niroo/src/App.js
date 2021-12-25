@@ -26,14 +26,16 @@ import SearchPage from './Pages/SearchPage'
 import { Context } from './components/Contexts/ContextProvider'
 import * as api from './components/Api'
 import { useQuery } from 'react-query'
+import axios from 'axios'
 
 function App() {
-    const {userData} = useContext(Context)
+    const {userData, setUserData} = useContext(Context)
 
     // const getError = useQuery('errors', api.getErrors); 
     // if(getError.isSuccess){
     //     return getError.data;
     // }
+    
     
     if (window.location.pathname == '/login') {
         return (
@@ -44,7 +46,8 @@ function App() {
             </Router>
         )
     }
-    if(!localStorage.getItem('access_token')){
+    
+    if(!userData){
         window.location.pathname = '/login'; 
     }
     return (
