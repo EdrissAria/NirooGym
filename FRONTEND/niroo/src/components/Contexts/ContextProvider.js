@@ -38,11 +38,9 @@ const ContextProvider = (props) => {
 
                 localStorage.setItem('access_token', token);
                 localStorage.setItem('expire_time', expire_at);
-                
-                
+                    
                 window.location.pathname = '/'
             
-               
             } else {
                 throw Error(response.data.message)
             }
@@ -59,7 +57,6 @@ const ContextProvider = (props) => {
         })
         .catch(error=> console.log(error))
     }, [])
-     
     /*________________________________________________________logout__________________________________________________________________*/
     const logout = () => {
         localStorage.removeItem('access_token');
@@ -69,6 +66,7 @@ const ContextProvider = (props) => {
         window.location.replace('/login')
     }
 
+      
     // value pass into context 
     const value = {
         earn,

@@ -30,26 +30,24 @@ import axios from 'axios'
 
 function App() {
     const {userData, setUserData} = useContext(Context)
-
-    // const getError = useQuery('errors', api.getErrors); 
-    // if(getError.isSuccess){
-    //     return getError.data;
-    // }
+    const history = useHistory(); 
     
     
+    console.log('history', history)
     if (window.location.pathname == '/login') {
         return (
             <Router>
                 <Switch>
-                    <Route exact path="/login" component={Login} />
+                    <Route path="/login" component={Login} />
                 </Switch>
             </Router>
         )
     }
-    
+
     if(!userData){
-        window.location.pathname = '/login'; 
+        return <Redirect to={'/login'} />
     }
+
     return (
         <Router>
             <Header />
@@ -76,6 +74,7 @@ function App() {
                 <Route path="/regEdit/:id" component={RegEdit} />
                 <Route path="/viewAgreementTime/:id" component={SingleAgrTime} />
                 <Route path="/updateAgreementTime/:id" component={UpdateAgr} />
+                
             </Switch>
         </Router>
     )

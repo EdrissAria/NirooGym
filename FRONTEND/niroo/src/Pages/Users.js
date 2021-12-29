@@ -19,9 +19,9 @@ function Users() {
         retry: 3
     });
     const addUser = useMutation(api.addUser);
-    if(addUser.isSuccess){
-        getUsers.refetch(); 
-    }     
+    // if(addUser.isSuccess){
+    //     getUsers.refetch(); 
+    // }     
     const options = [
         { key: 'Choes a position', value: '' },
         { key: 'Admin', value: 'admin' },

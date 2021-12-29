@@ -1070,4 +1070,57 @@ class Functions
             ));
         }
     }
+    //uploading images 
+    public function upload($response, $upload_dir, $server_url, $photo_name, $photo_tmp_name, $error){
+        $getPhoto = $this->db->con->query("SELECT * FROM users WHERE photo = '$photo_name'");
+        $rows = mysqli_num_rows($getPhoto);
+
+        if($rows < 1){
+            $photo_name = $_FILES['photo']['name'];
+            $photo_tmp_name = $_FILES["photo"]["tmp_name"];
+            $error = $_FILES['photo']['error'];
+
+            if($error > 0){
+                $response = array(
+                    "status" => "error",
+                    "error" => true,
+                    "message" => "Error uploading the file"
+                );
+            }else{
+                // $random_name = rand(1000, 1000000)."-".$photo_name;
+                $upload_name = $upload_dir.strtolower($photo_name);
+                $upload_name = preg_replace('/\s+/', '-', $upload_name);
+            }
+
+            if(move_uploaded_file($photo_tmp_name, $upload_name)){
+                $response = array(
+                    "status" => "success",
+                    "error" => false,
+                    "message" => "file uploaded successfully",
+                    "url" => $server_url.'/'.$upload_name,
+                    'image' => $photo_name
+                );
+            }else{
+                $response = array(
+                    "status" => "error", 
+                    "error" => true, 
+                    "message" => "Error uploading file"
+                );
+            }
+            }elseif($rows > 0){
+                $response = array(
+                    "status" => "normal", 
+                    "error" => false,
+                    "message" => "this image uploaded once!"
+                );
+            }elseif(!$photo_name){
+                $response = array(
+                    "status" => "error", 
+                    "error" => true,
+                    "message" => "no file is selected!"
+                );
+            }
+
+            echo json_encode($response);
+    }
 }

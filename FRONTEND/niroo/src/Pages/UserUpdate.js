@@ -13,11 +13,9 @@ function UserUpdate() {
     const getUser = useQuery(['user', id], () => api.getSingleUser(id));
     const updateUser = useMutation(api.updateUser);
 
-    // if(updateUser.isSuccess){
-    //     return <Redirect to="/users" />
-    // }
+    
     if(updateUser.isSuccess){
-        console.log(updateUser.data); 
+        return <Redirect to="/users" />
     }
 
     if(updateUser.isError){
