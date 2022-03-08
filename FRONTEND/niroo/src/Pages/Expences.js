@@ -14,9 +14,10 @@ function Expences() {
     const addExpense = useMutation(api.addExpense); 
     const {userData} = useContext(Context); 
 
-    // if(addExpense.isSuccess){
-    //     getExpence.refetch(); 
-    // }
+    if(addExpense.isSuccess){
+        getExpence.refetch();     
+    }
+
     const initialValues = {
         type: '',
         amount: ''
@@ -28,7 +29,7 @@ function Expences() {
     })
     const onSubmit = values=>{
         const expenseData = {
-            write_by: userData.user,
+            write_by: userData.username,
             expense: values.type,
             amount: values.amount
         }

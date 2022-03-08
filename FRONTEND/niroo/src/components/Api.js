@@ -35,16 +35,16 @@ export const getErrors = () => api.get('/database/DBController.php').then(res =>
 
 //delete user
 export const deleteUser = async (id) => {
-    const response = await api.get(`/deleteUser.php?id=${id}`)
+    const response = await api.delete(`/deleteUser.php?id=${id}`)
 }
 
 //delete staff 
 export const deleteStaff = async (id) => {
-    const response = await api.get(`/deleteStaff.php?id=${id}`)
+    const response = await api.delete(`/deleteStaff.php?id=${id}`)
 }
 //delete loans 
 export const deleteLoan = async (id) => {
-    const response = await api.get(`/deleteLoan.php?id=${id}`)
+    const response = await api.delete(`/deleteLoan.php?id=${id}`)
 }
 //update users 
 export const updateUser = async ({ id, ...updatedUser }) => {

@@ -9,7 +9,9 @@ import { useMutation } from 'react-query'
 
 function AgreementTime() {
     const addAgr = useMutation(api.addAgrtime)
-   
+    if(addAgr.isSuccess){
+        return <Redirect to="registerdTime"/>;
+    }
 
     const options = [
         { key: 'Saturday', value: 'saturday' },

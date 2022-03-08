@@ -45,7 +45,7 @@ function App() {
     }
 
     if(!userData){
-        return <Redirect to={'/login'} />
+        return <Login />
     }
 
     return (
@@ -73,8 +73,7 @@ function App() {
                 <Route path="/staffUpdate/:id" component={StaffUpdate} />
                 <Route path="/regEdit/:id" component={RegEdit} />
                 <Route path="/viewAgreementTime/:id" component={SingleAgrTime} />
-                <Route path="/updateAgreementTime/:id" component={UpdateAgr} />
-                
+                <Route path="/updateAgreementTime/:id" component={UpdateAgr} />                
             </Switch>
         </Router>
     )

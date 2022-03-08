@@ -878,55 +878,55 @@ class Functions
         for ($i = 1; $i <= 12; $i++) {
             switch ($i) {
                 case 1:
-                    $data = $this->db->con->query("SELECT (SUM(earn) - SUM(expense)) AS gain FROM bank WHERE updated_at LIKE('$year-1-%') ORDER BY bank_id DESC LIMIT 1");
+                    $data = $this->db->con->query("SELECT (SUM(earn) - SUM(expense)) AS gain FROM bank WHERE updated_at LIKE('$year-01-%') ORDER BY bank_id DESC LIMIT 1");
                     $january = mysqli_fetch_assoc($data);
                     $january == null || $january['gain'] < 0 ? $january['gain'] = 0 : $january['gain'];
                     array_push($yearArray, $january['gain']);
                     break;
                 case 2:
-                    $data = $this->db->con->query("SELECT (SUM(earn) - SUM(expense)) AS gain FROM bank WHERE updated_at LIKE('$year-2-%') ORDER BY bank_id DESC LIMIT 1");
+                    $data = $this->db->con->query("SELECT (SUM(earn) - SUM(expense)) AS gain FROM bank WHERE updated_at LIKE('$year-02-%') ORDER BY bank_id DESC LIMIT 1");
                     $february = mysqli_fetch_assoc($data);
                     $february == null || $february['gain'] < 0 ? $february['gain'] = 0 : $february['gain'];
                     array_push($yearArray, $february['gain']);
                     break;
                 case 3:
-                    $data = $this->db->con->query("SELECT (SUM(earn) - SUM(expense)) AS gain FROM bank WHERE updated_at LIKE('$year-3-%') ORDER BY bank_id DESC LIMIT 1");
+                    $data = $this->db->con->query("SELECT (SUM(earn) - SUM(expense)) AS gain FROM bank WHERE updated_at LIKE('$year-03-%') ORDER BY bank_id DESC LIMIT 1");
                     $march = mysqli_fetch_assoc($data);
                     $march == null || $march['gain'] < 0 ? $march['gain'] = 0 : $march['gain'];
                     array_push($yearArray, $march['gain']);
                     break;
                 case 4:
-                    $data = $this->db->con->query("SELECT (SUM(earn) - SUM(expense)) AS gain FROM bank WHERE updated_at LIKE('$year-4-%') ORDER BY bank_id DESC LIMIT 1");
+                    $data = $this->db->con->query("SELECT (SUM(earn) - SUM(expense)) AS gain FROM bank WHERE updated_at LIKE('$year-04-%') ORDER BY bank_id DESC LIMIT 1");
                     $april = mysqli_fetch_assoc($data);
                     $april == null || $april['gain'] < 0 ? $april['gain'] = 0 : $april['gain'];
                     array_push($yearArray, $april['gain']);
                     break;
                 case 5:
-                    $data = $this->db->con->query("SELECT (SUM(earn) - SUM(expense)) AS gain FROM bank WHERE updated_at LIKE('$year-5-%') ORDER BY bank_id DESC LIMIT 1");
+                    $data = $this->db->con->query("SELECT (SUM(earn) - SUM(expense)) AS gain FROM bank WHERE updated_at LIKE('$year-05-%') ORDER BY bank_id DESC LIMIT 1");
                     $may = mysqli_fetch_assoc($data);
                     $may == null || $may['gain'] < 0 ? $may['gain'] = 0 : $may['gain'];
                     array_push($yearArray, $may['gain']);
                     break;
                 case 6:
-                    $data = $this->db->con->query("SELECT (SUM(earn) - SUM(expense)) AS gain FROM bank WHERE updated_at LIKE('$year-6-%') ORDER BY bank_id DESC LIMIT 1");
+                    $data = $this->db->con->query("SELECT (SUM(earn) - SUM(expense)) AS gain FROM bank WHERE updated_at LIKE('$year-06-%') ORDER BY bank_id DESC LIMIT 1");
                     $june = mysqli_fetch_assoc($data);
                     $june == null || $june['gain'] < 0 ? $june['gain'] = 0 : $june['gain'];
                     array_push($yearArray, $june['gain']);
                     break;
                 case 7:
-                    $data = $this->db->con->query("SELECT (SUM(earn) - SUM(expense)) AS gain FROM bank WHERE updated_at LIKE('$year-7-%') ORDER BY bank_id DESC LIMIT 1");
+                    $data = $this->db->con->query("SELECT (SUM(earn) - SUM(expense)) AS gain FROM bank WHERE updated_at LIKE('$year-07-%') ORDER BY bank_id DESC LIMIT 1");
                     $july = mysqli_fetch_assoc($data);
                     $july == null || $july['gain'] < 0 ? $july['gain'] = 0 : $july['gain'];
                     array_push($yearArray, $july['gain']);
                     break;
                 case 8:
-                    $data = $this->db->con->query("SELECT (SUM(earn) - SUM(expense)) AS gain FROM bank WHERE updated_at LIKE('$year-8-%') ORDER BY bank_id DESC LIMIT 1");
+                    $data = $this->db->con->query("SELECT (SUM(earn) - SUM(expense)) AS gain FROM bank WHERE updated_at LIKE('$year-08-%') ORDER BY bank_id DESC LIMIT 1");
                     $august = mysqli_fetch_assoc($data);
                     $august == null || $august['gain'] < 0 ? $august['gain'] = 0 : $august['gain'];
                     array_push($yearArray, $august['gain']);
                     break;
                 case 9:
-                    $data = $this->db->con->query("SELECT (SUM(earn) - SUM(expense)) AS gain FROM bank WHERE updated_at LIKE('$year-9-%') ORDER BY bank_id DESC LIMIT 1");
+                    $data = $this->db->con->query("SELECT (SUM(earn) - SUM(expense)) AS gain FROM bank WHERE updated_at LIKE('$year-09-%') ORDER BY bank_id DESC LIMIT 1");
                     $september = mysqli_fetch_assoc($data);
                     $september == null || $september['gain'] < 0 ? $september['gain'] = 0 : $september['gain'];
                     array_push($yearArray, $september['gain']);

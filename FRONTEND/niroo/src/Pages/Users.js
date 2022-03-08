@@ -45,7 +45,7 @@ function Users() {
         let upload = new FormData();
         upload.append('photo', values.photo);
         api.uploadFile(upload);
-
+        
         // sending data to database
         let userdata = {
             created_by: userData.username,

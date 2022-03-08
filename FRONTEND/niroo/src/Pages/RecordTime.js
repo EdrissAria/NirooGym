@@ -9,9 +9,9 @@ import { useMutation } from 'react-query'
 
 function RecordTime() {
     const addRegtime = useMutation(api.addRegtime);
-    // if(addRegtime.isSuccess){
-    //     return window.location.reload();
-    // }
+    if(addRegtime.isSuccess){
+        return <Redirect to="registerdTime"/>;
+    }
     const initialValues = {
         name: '',
         phone: '',

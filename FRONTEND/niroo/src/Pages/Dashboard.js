@@ -12,7 +12,7 @@ function Dashboard() {
     const dashboard = useQuery('dashboard', api.getInfo);
     const getData = useQuery('data', api.getData);
     const {userData} = useContext(Context); 
-     
+    console.log('wise: ', getData.data)     
     if (dashboard.isSuccess && getData.isSuccess) {
         return (
             <div className="graph_area">
