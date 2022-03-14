@@ -61,7 +61,7 @@ function Header() {
                         <ul className="navbar_nav">
                             <li className="navbar-nav mr-auto mt-2 mt-lg-0 nav-item">
                                 <input type="text" name="search" onFocus={()=> setEmptyStyle({})} onChange={searchChanges} placeholder="search here.." style={emptyStyle} className="search" />
-                                <button onClick={searchHandler}  className="btn-search" style={emptyStyle}><img src={'/assets/img/search.png'} /></button>
+                                <button onClick={searchHandler}  className="btn-search" style={emptyStyle}><img src={'/assets/img/search.png'} alt="search"/></button>
                             </li>
                             {
                                 em ?<div style={{position: 'absolute',top: 43, padding: '0 20px', color: 'red', transition: '0.5s'}}>write something to search</div>:

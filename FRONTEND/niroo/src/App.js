@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react'
 import Header from './components/Header'
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import RecordTime from './Pages/RecordTime'
 import RegisterdTime from './Pages/RegisterdTime'
 import Dashboard from './Pages/Dashboard'
@@ -30,10 +30,7 @@ import axios from 'axios'
 
 function App() {
     const {userData, setUserData} = useContext(Context)
-    const history = useHistory(); 
-    
-    
-    console.log('history', history)
+ 
     if (window.location.pathname == '/login') {
         return (
             <Router>
@@ -45,8 +42,8 @@ function App() {
     }
 
     if(!userData){
-        return <Login />
-    }
+        window.location.replace('login')
+    } 
 
     return (
         <Router>

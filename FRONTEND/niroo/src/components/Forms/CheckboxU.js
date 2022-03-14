@@ -6,13 +6,14 @@ function CheckboxU(props) {
     const [check, setcheck] = useState(false);
     const { name, label, options, selected, ...rest } = props
 
+    // TODO: try defaultChecked => checked
     return (
         <div className='form-group my-2'>
             <label>{label}</label>
             <table>
                 <tbody>
                     <tr style={{ borderTop: '1px solid darkgray', width: '100%' }}>
-                        {
+                        {            
                             options.map(option => {
                                 return (
                                     <td key={option.value} className="tddays">

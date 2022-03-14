@@ -1,5 +1,4 @@
-import React from 'react'
-import {Link, Redirect} from 'react-router-dom'
+import React, {useContext} from 'react'
 import {Formik, Form} from 'formik'
 import * as Yup from 'yup'
 import FormControl from '../components/FormControl'
@@ -8,14 +7,11 @@ import * as api from '../components/Api'
 import BookList from '../components/Lists/BookList'
 import Title from '../components/Title'
 
+
 function CashBook() {
     const getBook = useQuery('book', api.getBook);
-    const addBook = useMutation(api.addBook);
-
-    // if(addBook.isSuccess){
-    //     window.location.reload();
-    // }
-
+    const addBook = useMutation(api.addBook, {onSuccess: ()=> getBook.refetch()});
+   
     const initialValues = {
         amount: '',
         description: ''
@@ -28,7 +24,7 @@ function CashBook() {
     const onSubmit = values=>{
         const bookData = {
             amount: values.amount,
-            description: values.description
+            description: values.description, 
         }
         addBook.mutate(bookData);
     }

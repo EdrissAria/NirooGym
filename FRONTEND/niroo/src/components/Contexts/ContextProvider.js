@@ -56,6 +56,9 @@ const ContextProvider = (props) => {
             setUserData(res.data.user) 
         })
         .catch(error=> console.log(error))
+        return ()=>{
+            setUserData([])
+        }
     }, [])
     /*________________________________________________________logout__________________________________________________________________*/
     const logout = () => {
