@@ -24,9 +24,7 @@ import Bank from './Pages/Bank'
 import Login from './Pages/Login'
 import SearchPage from './Pages/SearchPage'
 import { Context } from './components/Contexts/ContextProvider'
-import * as api from './components/Api'
-import { useQuery } from 'react-query'
-import axios from 'axios'
+ 
 
 function App() {
     const {userData, setUserData} = useContext(Context)
