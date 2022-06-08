@@ -1,7 +1,5 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Headers: *');
-header('Access-Support-Methods: *');
+require('cors.php');
 require('objects.php');
 
 $earn = $_GET['earn'];

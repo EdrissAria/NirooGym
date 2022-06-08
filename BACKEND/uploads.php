@@ -1,6 +1,5 @@
 <?php 
-    header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Headers: *');
+  require('cors.php');
     require('objects.php');
 
     $response = array();

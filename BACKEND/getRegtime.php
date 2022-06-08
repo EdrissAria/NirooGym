@@ -1,6 +1,5 @@
 <?php
-header('Access-Control-Allow-Headers: *');
-header('Access-Control-Allow-Origin: *');
+require('cors.php');
 require('objects.php');
 
 $status = $_GET['status'];
